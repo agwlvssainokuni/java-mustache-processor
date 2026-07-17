@@ -448,3 +448,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step11完了、Parserバグ修正)
 
 ---
+
+## Code Generation (core) - Step12完了
+**Timestamp**: 2026-07-18T08:13:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "公式Mustache spec YAML（comments/delimiters/interpolation/inverted/partials/sections/~lambdas）をgithub.com/mustache/specから取得しcore/src/test/resources/spec/に配置。spec/MustacheSpecTest.javaでJUnit5動的テストとして全ケースを実行（~lambdas.ymlの10ケースはテスト名ベースでJava Lambda実装にマッピング）。実行の結果、実装バグを5件発見・是正: (1)変数タグLambdaの再パースはデフォルトデリミタが正しい（現在のデリミタではない）、(2)パーシャル循環参照検出をネスト深さ上限方式に変更（名前再出現方式は正当な自己再帰を誤検出）、(3)スタンドアロン行トリミングを2パス方式に変更（隣接タグでの共有トークン誤判定を修正）、(4)SectionNodeでスカラー値も常にpushするよう修正（{{.}}と親フォールバックの両立）、(5)パーシャルインデントは生テンプレート文字列に適用するよう修正（レンダリング後出力への適用だと埋め込みデータの改行も誤ってインデントされる）。business-logic-model.md/business-rules.md/domain-entities.mdの該当箇所を是正記録として更新。全196テスト（例示38+PBT12+公式spec146）成功。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step12完了、実装バグ5件是正)
+
+---

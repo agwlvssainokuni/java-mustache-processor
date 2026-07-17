@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 
 /**
@@ -52,29 +51,27 @@ public final class PartialNode extends Node {
             return;
         }
         if (!session.beginPartial(partialName)) {
-            log.warn("Circular partial reference detected: {}", partialName);
-            throw new MustacheRenderException("Circular partial reference detected: " + partialName, partialName);
+            log.warn("Partial nesting too deep, possible circular reference: {}", partialName);
+            throw new MustacheRenderException("Partial nesting too deep, possible circular reference: " + partialName, partialName);
         }
         try {
-            Node partialRoot = session.reparse(partialTemplate, DEFAULT_OPEN, DEFAULT_CLOSE);
-            if (indent.isEmpty()) {
-                partialRoot.render(context, session, out);
-            } else {
-                StringWriter buffer = new StringWriter();
-                partialRoot.render(context, session, buffer);
-                out.write(applyIndent(buffer.toString(), indent));
-            }
+            // インデントはレンダリング後の出力ではなく、パーシャルの生テンプレート文字列（パース前）に適用する。
+            // こうすることで、埋め込まれたデータ値自体に含まれる改行はインデントの影響を受けない
+            // （公式spec partials.yml「Standalone Indentation」準拠）。
+            String source = indent.isEmpty() ? partialTemplate : applyIndent(partialTemplate, indent);
+            Node partialRoot = session.reparse(source, DEFAULT_OPEN, DEFAULT_CLOSE);
+            partialRoot.render(context, session, out);
         } finally {
             session.endPartial(partialName);
         }
     }
 
-    private static String applyIndent(String rendered, String indent) {
-        if (rendered.isEmpty()) {
-            return rendered;
+    private static String applyIndent(String template, String indent) {
+        if (template.isEmpty()) {
+            return template;
         }
         StringBuilder sb = new StringBuilder();
-        String[] lines = rendered.split("\n", -1);
+        String[] lines = template.split("\n", -1);
         for (int i = 0; i < lines.length; i++) {
             boolean isLast = i == lines.length - 1;
             if (!(isLast && lines[i].isEmpty())) {

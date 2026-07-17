@@ -55,7 +55,7 @@ Parserは1回のパースパスで以下を同時に行う（実装は内部的�
 - **SectionNode**: `context.resolve(key)`の値に応じて分岐する（真偽判定の詳細はbusiness-rules.md）
   - 値が`Lambda`: 2.4節の手順に従う
   - 値が真かつリスト: リストの各要素について、その要素を新しいスコープとして`context.push(element)`し、セクション内の子ノード群をレンダリングする
-  - 値が真かつリスト以外（オブジェクト/真偽値true等）: その値を新しいスコープとして`context.push(value)`し（値がMap/POJOでない場合は現在のコンテキストをそのままpushする、単純に「1回だけ描画する」ためのスコープとして扱う）、子ノード群を1回レンダリングする
+  - 値が真かつリスト以外（オブジェクト/真偽値true/スカラー値等）: 値の型を問わず常に`context.push(value)`し、子ノード群を1回レンダリングする（公式spec `sections.yml`「Variable test」参照。`{{.}}`で値自身に、`{{key}}`で親コンテキストへのフォールバックにそれぞれアクセスできる必要があるため。Code Generation Step12で「スカラー値はpushしない」という当初の記述を是正）
   - 値が偽（falsy）: 何も出力しない
 - **InvertedSectionNode**: 値が偽（falsy）の場合のみ、現在のコンテキストのまま（pushしない）子ノード群をレンダリングする。値が真の場合は何も出力しない
 - **CommentNode**: 何も出力しない（コンパイル時点で内容は保持するが、レンダリング時には無視する）
@@ -72,8 +72,10 @@ Parserは1回のパースパスで以下を同時に行う（実装は内部的�
 - 途中のセグメントが解決できない（missing、またはMap/POJOではないプリミティブに対して更なるセグメント解決を試みた）場合、そのタグは「未解決」として扱い、変数展開は空文字列、セクションは偽として扱う（Broken Chain）
 
 ### 2.4 ラムダの扱い
-- **VariableNode/UnescapedVariableNodeの値がLambda**: `Lambda.execute("")`相当（変数タグの場合、渡す生テキストは無い）を呼び出し、返却された文字列を**現在のデリミタで**テンプレートとして再パース・再レンダリング（現在の`Context`を使用）した結果を、タグ種別に応じてエスケープ有無を適用して出力する
-- **SectionNodeの値がLambda**: そのセクションの開始タグと終了タグに挟まれた「生のテンプレート文字列（未パース、未解釈）」を`Lambda.execute(rawText)`に渡し、返却された文字列を現在のデリミタ・現在の`Context`で再パース・再レンダリングした結果を出力する（Section由来のためエスケープは適用しない、公式spec準拠）
+- **VariableNode/UnescapedVariableNodeの値がLambda**: `Lambda.execute("")`相当（変数タグの場合、渡す生テキストは無い）を呼び出し、返却された文字列を**常にデフォルトデリミタ（`{{ }}`）で**テンプレートとして再パース・再レンダリング（現在の`Context`を使用）した結果を、タグ種別に応じてエスケープ有無を適用して出力する（公式spec `~lambdas.yml`「Interpolation - Alternate Delimiters」で明記: 変数タグLambdaの戻り値は現在のデリミタではなく常にデフォルトデリミタで解釈される。Section由来のLambdaとは異なる点に注意）
+- **SectionNodeの値がLambda**: そのセクションの開始タグと終了タグに挟まれた「生のテンプレート文字列（未パース、未解釈）」を`Lambda.execute(rawText)`に渡し、返却された文字列を**現在のデリミタ**・現在の`Context`で再パース・再レンダリングした結果を出力する（Section由来のためエスケープは適用しない。公式spec `~lambdas.yml`「Section - Alternate Delimiters」準拠）
+
+**是正記録（Code Generation Step12着手時）**: 当初のFunctional Designでは変数タグLambdaも「現在のデリミタ」で再パースすると記述していたが、公式spec本文（`~lambdas.yml`のoverviewおよび「Interpolation - Alternate Delimiters」テストケース）を確認した結果、変数タグLambdaは常にデフォルトデリミタで再パースするのが正しい仕様であることが判明したため、本ドキュメントおよび実装（`VariableNode`, `UnescapedVariableNode`）を修正した。
 - **InvertedSectionNodeの値がLambda**: Lambdaは常に真とみなし、Inverted Sectionとしては何も出力しない（公式spec準拠）
 
 ### 2.5 パーシャル循環参照の検出

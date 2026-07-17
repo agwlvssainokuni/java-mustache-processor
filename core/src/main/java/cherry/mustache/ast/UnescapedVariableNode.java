@@ -27,14 +27,13 @@ import java.io.Writer;
  */
 public final class UnescapedVariableNode extends Node {
 
-    private final String key;
-    private final String openDelimiter;
-    private final String closeDelimiter;
+    private static final String DEFAULT_OPEN = "{{";
+    private static final String DEFAULT_CLOSE = "}}";
 
-    public UnescapedVariableNode(String key, String openDelimiter, String closeDelimiter) {
+    private final String key;
+
+    public UnescapedVariableNode(String key) {
         this.key = key;
-        this.openDelimiter = openDelimiter;
-        this.closeDelimiter = closeDelimiter;
     }
 
     @Override
@@ -42,7 +41,9 @@ public final class UnescapedVariableNode extends Node {
         Object value = context.resolve(key);
         String text;
         if (value instanceof Lambda lambda) {
-            text = LambdaSupport.renderLambdaOutput(lambda.execute(""), context, session, openDelimiter, closeDelimiter);
+            // 公式spec ~lambdas.yml「Interpolation - Alternate Delimiters」: 変数タグのLambda戻り値は
+            // 現在のデリミタではなく常にデフォルトデリミタで再パースする（セクションタグとは異なる）
+            text = LambdaSupport.renderLambdaOutput(lambda.execute(""), context, session, DEFAULT_OPEN, DEFAULT_CLOSE);
         } else {
             text = value == null ? "" : String.valueOf(value);
         }

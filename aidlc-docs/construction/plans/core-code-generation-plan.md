@@ -106,10 +106,17 @@
 - **PBT実行で発見した実装バグの修正**: `nonCircularPartialReferencesAreIndependentAndDeterministic`プロパティが失敗し、Parserのスタンドアロン行判定に不備を発見（同一行に複数タグが隣接する場合、両方を誤って「単独行」と判定していた）。BR-4「そのタグが行内で唯一のコンテンツ」の「唯一」を厳密に満たすよう`applyStandaloneTrimming`を修正（前後最大2トークン参照で「別のタグが同じ行に存在するか」を正しく判定）。修正後、全50テスト（例示ベース38件＋PBT 12件）成功
 
 ### Step 12: 公式Mustache specテストスイートの統合（NFR-3, BR-2, Oracle PBT）
-- [ ] `core/src/test/resources/spec/`配下にBR-2で確定したスコープのYAMLファイル（`comments.yml`, `delimiters.yml`, `interpolation.yml`, `inverted.yml`, `partials.yml`, `sections.yml`, `~lambdas.yml`）を配置
-- [ ] YAMLパース用テストスコープ依存（SnakeYAML等）を`core/build.gradle.kts`の`testImplementation`に追加
-- [ ] spec YAMLを読み込み、各テストケースをJUnit 5の動的テスト（`@TestFactory`）として実行するテストランナーを実装
-- [ ] `~lambdas.yml`内のラムダケースについては、YAML内のスクリプト定義（Ruby想定）をJavaの`Lambda`実装へ手動でマッピングする対応表を用意
+- [x] `core/src/test/resources/spec/`配下にBR-2で確定したスコープのYAMLファイル（`comments.yml`, `delimiters.yml`, `interpolation.yml`, `inverted.yml`, `partials.yml`, `sections.yml`, `~lambdas.yml`）を公式リポジトリ（github.com/mustache/spec）から取得し配置
+- [x] YAMLパース用テストスコープ依存（SnakeYAML 2.3）を`core/build.gradle.kts`の`testImplementation`に追加済み（Step1）
+- [x] spec YAMLを読み込み、各テストケースをJUnit 5の動的テスト（`@TestFactory`）として実行する`spec/MustacheSpecTest.java`を実装（`!code`タグをマーカーオブジェクトに置き換えるカスタムSnakeYAML Constructorを使用）
+- [x] `~lambdas.yml`内の10ケースについて、Ruby等のコード定義をテスト名ベースで対応するJava `Lambda`実装にマッピング（`lambdaImplementations()`）
+- **spec実行で発見・是正した実装バグ（4件）**:
+  1. 変数タグLambdaの戻り値は「現在のデリミタ」ではなく常に**デフォルトデリミタ**で再パースすべきだった（`~lambdas.yml`「Interpolation - Alternate Delimiters」）。`VariableNode`/`UnescapedVariableNode`を修正し、`openDelimiter`/`closeDelimiter`フィールドを削除
+  2. パーシャル循環参照検出を「パーシャル名の再出現」で行っていたため、`partials.yml`「Recursion」テスト（データ駆動で終端する正当な自己再帰）を誤検出していた。検出基準を「ネスト深さの上限（100）」に変更（`RenderSession`, BR-9是正）
+  3. `applyStandaloneTrimming`が、隣接する2つのスタンドアロンタグが同じTEXTトークンを共有する場合に誤判定していた（`inverted.yml`/`sections.yml`「Standalone Line Endings」、`delimiters.yml`「Sections」「Inverted Sections」）。判定と適用を2パスに分離し是正
+  4. `SectionNode`で真かつリスト以外の値のうちスカラー値をpushしない実装になっていたため、`{{.}}`と`{{key}}`（親へのフォールバック）を両立できなかった（`sections.yml`「Variable test」「Deeply Nested Contexts」）。スカラー値も常にpushするよう是正
+  5. パーシャルのインデント再適用を「レンダリング後の出力文字列」に対して行っていたため、埋め込まれたデータ値自体の改行にも誤ってインデントが付与されていた（`partials.yml`「Standalone Indentation」）。インデントは「パーシャルの生テンプレート文字列（パース前）」に適用するよう是正（BR-5是正）
+- 全196テスト（例示ベース38件＋PBT 12件＋公式spec 146件）成功
 
 ### Step 13: 信頼性テスト（Reliability、nfr-design-patterns.md）
 - [ ] 同一`Template`インスタンスへの並行`render()`呼び出しを検証するマルチスレッドテストを実装（複数スレッドが異なるデータで同時にrenderし、各スレッドの出力が期待値と一致することを確認）

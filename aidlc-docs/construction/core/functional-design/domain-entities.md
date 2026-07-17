@@ -64,5 +64,5 @@ Application Design（`components.md`）で識別したコンポーネントの�
 ### MustacheRenderException（`MustacheException`を継承）
 - **フィールド**: `key: String`（nullable、エラーに関連するタグ/パーシャル名。BR-8のPOJO例外ラップ時やBR-9の循環参照検出時に設定）
 
-## 循環参照検出用の内部状態（Renderer内部、公開APIではない）
-- **フィールド**: `resolvingPartials: Set<String>`（`render()`呼び出し1回のスコープで生存する、現在解決中のパーシャル名集合。BR-9参照。`Renderer`または`Template.render()`呼び出しの内部でスレッドローカルではなく呼び出しスタック上のローカル変数として管理し、スレッドセーフ性を確保する）
+## 循環参照検出用の内部状態（RenderSession内部、公開APIではない）
+- **フィールド**: `partialDepth: int`（`render()`呼び出し1回のスコープで生存する、現在のパーシャル解決ネスト深さ。BR-9参照。上限（100）到達で循環参照とみなす。`RenderSession`はスレッドローカルではなく呼び出しスタック上のローカル変数として管理し、スレッドセーフ性を確保する。Code Generation Step12で「パーシャル名の再出現」から「ネスト深さの上限」に検出基準を是正）

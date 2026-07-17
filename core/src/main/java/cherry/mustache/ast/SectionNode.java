@@ -67,21 +67,15 @@ public final class SectionNode extends Node {
             return;
         }
 
-        if (isScalar(value)) {
-            renderChildren(context, session, out);
-        } else {
-            renderChildren(context.push(value), session, out);
-        }
+        // 公式spec sections.yml「Variable test」: 真かつリスト以外の値は、スカラーであっても
+        // 新しいスコープとしてpushする（{{.}}で値自身を、{{key}}で親コンテキストへのフォールバックを両立させる）
+        renderChildren(context.push(value), session, out);
     }
 
     private void renderChildren(Context context, RenderSession session, Writer out) throws IOException {
         for (Node child : children) {
             child.render(context, session, out);
         }
-    }
-
-    private static boolean isScalar(Object value) {
-        return value instanceof Boolean || value instanceof Number || value instanceof CharSequence || value instanceof Character;
     }
 
     private static Iterable<?> toIterable(Object value) {

@@ -19,20 +19,24 @@ import cherry.mustache.PartialResolver;
 import cherry.mustache.ast.Node;
 import cherry.mustache.ast.Reparser;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * 1回の{@code render()}呼び出しに紐づくレンダリング状態。
  * パーシャル解決・Lambda出力の再パース・パーシャル循環参照検出（BR-9）をまとめて提供する。
  * インスタンスは{@code render()}呼び出しごとに生成され、呼び出しスタックローカルに保持される
  * （スレッドローカルではない。nfr-design-patterns.md参照）。
+ *
+ * <p>循環参照検出は「パーシャル名の再出現」ではなく、パーシャル解決のネスト深さの上限（{@link #MAX_PARTIAL_DEPTH}）で行う。
+ * 公式spec {@code partials.yml}「Recursion」テストが示す通り、同名パーシャルがデータ駆動で正当に自己再帰し
+ * 終端するケース（木構造の描画等）が存在するため、名前の再出現だけでは循環参照と正当な再帰を区別できない
+ * （Code Generation Step12で発見・是正）。
  */
 public final class RenderSession {
 
+    private static final int MAX_PARTIAL_DEPTH = 100;
+
     private final PartialResolver partialResolver;
     private final Reparser reparser;
-    private final Set<String> resolvingPartials = new HashSet<>();
+    private int partialDepth = 0;
 
     public RenderSession(PartialResolver partialResolver, Reparser reparser) {
         this.partialResolver = partialResolver;
@@ -49,13 +53,17 @@ public final class RenderSession {
 
     /**
      * @param partialName 解決を開始するパーシャル名
-     * @return 循環参照ではなく解決を開始できた場合は{@code true}
+     * @return ネスト深さの上限に達しておらず解決を開始できた場合は{@code true}
      */
     public boolean beginPartial(String partialName) {
-        return resolvingPartials.add(partialName);
+        if (partialDepth >= MAX_PARTIAL_DEPTH) {
+            return false;
+        }
+        partialDepth++;
+        return true;
     }
 
     public void endPartial(String partialName) {
-        resolvingPartials.remove(partialName);
+        partialDepth--;
     }
 }

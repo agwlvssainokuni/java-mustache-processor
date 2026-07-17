@@ -195,13 +195,24 @@ public final class Parser {
     private static void applyStandaloneTrimming(List<Token> tokens) {
         // トークン列はTEXTとTAGが交互に並ぶ（tokenize()の構造上、TEXTトークンが連続することは無い）ため、
         // 「行内でこのタグが唯一のコンテンツか」の判定は直前・直後最大2トークンの参照で判定できる。
-        for (int i = 0; i < tokens.size(); i++) {
+        //
+        // 隣接する2つのスタンドアロンタグが同じTEXTトークンを共有する場合（例: {{#a}}\n{{/a}}）、
+        // 両タグの判定・トリム量を先にすべて算出してから最後に一括適用する（2パス）。
+        // 1パスで判定と適用を同時に行うと、片方のタグの適用で共有トークンの内容が変化し、
+        // もう片方のタグの判定（改行の有無）を誤らせるバグになるため。
+        int size = tokens.size();
+        int[] trimStart = new int[size];
+        int[] trimEnd = new int[size];
+        for (int i = 0; i < size; i++) {
+            trimEnd[i] = tokens.get(i).content != null ? tokens.get(i).content.length() : 0;
+        }
+
+        for (int i = 0; i < size; i++) {
             Token tag = tokens.get(i);
             if (!STANDALONE_ELIGIBLE.contains(tag.type)) {
                 continue;
             }
 
-            Token prevText = null;
             String prevTail = "";
             int prevNewline = -1;
             boolean prevOk;
@@ -212,7 +223,6 @@ public final class Parser {
                 if (before.type != TokenType.TEXT) {
                     prevOk = false;
                 } else {
-                    prevText = before;
                     prevNewline = before.content.lastIndexOf('\n');
                     if (prevNewline >= 0) {
                         prevTail = before.content.substring(prevNewline + 1);
@@ -224,34 +234,47 @@ public final class Parser {
                 }
             }
 
-            Token nextText = null;
             int nextNewline = -1;
             boolean nextOk;
-            if (i == tokens.size() - 1) {
+            if (i == size - 1) {
                 nextOk = true;
             } else {
                 Token after = tokens.get(i + 1);
                 if (after.type != TokenType.TEXT) {
                     nextOk = false;
                 } else {
-                    nextText = after;
                     nextNewline = after.content.indexOf('\n');
                     if (nextNewline >= 0) {
                         nextOk = isBlank(after.content.substring(0, nextNewline));
                     } else {
-                        nextOk = isBlank(after.content) && (i + 2 >= tokens.size());
+                        nextOk = isBlank(after.content) && (i + 2 >= size);
                     }
                 }
             }
 
             if (prevOk && nextOk) {
                 tag.indent = prevTail;
-                if (prevText != null) {
-                    prevText.content = prevNewline >= 0 ? prevText.content.substring(0, prevNewline + 1) : "";
+                if (i > 0 && tokens.get(i - 1).type == TokenType.TEXT) {
+                    int newEnd = prevNewline >= 0 ? prevNewline + 1 : 0;
+                    trimEnd[i - 1] = Math.min(trimEnd[i - 1], newEnd);
                 }
-                if (nextText != null) {
-                    nextText.content = nextNewline >= 0 ? nextText.content.substring(nextNewline + 1) : "";
+                if (i < size - 1 && tokens.get(i + 1).type == TokenType.TEXT) {
+                    int newStart = nextNewline >= 0 ? nextNewline + 1 : tokens.get(i + 1).content.length();
+                    trimStart[i + 1] = Math.max(trimStart[i + 1], newStart);
                 }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            Token token = tokens.get(i);
+            if (token.type != TokenType.TEXT) {
+                continue;
+            }
+            int start = Math.min(trimStart[i], token.content.length());
+            int end = Math.max(trimEnd[i], start);
+            end = Math.min(end, token.content.length());
+            if (start > 0 || end < token.content.length()) {
+                token.content = token.content.substring(start, end);
             }
         }
     }
@@ -280,9 +303,8 @@ public final class Parser {
                         stack.peek().children.add(new TextNode(token.content));
                     }
                 }
-                case VARIABLE -> stack.peek().children.add(new VariableNode(token.content, currentOpen, currentClose));
-                case UNESCAPED ->
-                        stack.peek().children.add(new UnescapedVariableNode(token.content, currentOpen, currentClose));
+                case VARIABLE -> stack.peek().children.add(new VariableNode(token.content));
+                case UNESCAPED -> stack.peek().children.add(new UnescapedVariableNode(token.content));
                 case COMMENT -> stack.peek().children.add(new CommentNode(token.content));
                 case PARTIAL -> stack.peek().children.add(new PartialNode(token.content, token.indent));
                 case SET_DELIM -> {

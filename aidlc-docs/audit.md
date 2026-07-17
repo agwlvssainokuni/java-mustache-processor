@@ -170,3 +170,11 @@
 **Context**: INCEPTION - Workflow Planning 完了。Application Designへ進む。
 
 ---
+
+## Application Design - 質問提示
+**Timestamp**: 2026-07-18T05:02:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/inception/plans/application-design-plan.md を作成。プロジェクト構成（マルチプロジェクト/単一プロジェクト）、パーサー/AST境界、レンダリング/コンテキスト境界、公開APIの形（ファクトリ+Template vs インスタンスエンジン）、例外階層とCLI終了コード対応、CLI内部構成（サービス層の要否）、ASTノード描画方式（ポリモーフィズム/switch/Visitor）の計7問を作成。回答待ち。"
+**Context**: INCEPTION - Application Design (Step 4-6)
+
+---

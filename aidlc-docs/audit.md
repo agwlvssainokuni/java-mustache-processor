@@ -268,3 +268,12 @@
 **Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 6-7)
 
 ---
+
+## Functional Design (core) - 承認
+**Timestamp**: 2026-07-18T06:15:00Z
+**AI Prompt**: "🔧 Request Changes / ✅ Continue to Next Stage"
+**User Response**: "Continue to Next Stage"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit1(core) Functional Design 完了。NFR Requirements (Unit 1: core) へ進む。
+
+---

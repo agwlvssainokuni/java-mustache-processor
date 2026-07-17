@@ -44,8 +44,8 @@
 ### 🟢 CONSTRUCTION PHASE
 
 #### Unit 1: Core Template Engine（`core`）
-- [ ] Functional Design — EXECUTE, In Progress
-- [ ] NFR Requirements — EXECUTE
+- [x] Functional Design — Complete, Approved (2026-07-18T06:15:00Z)
+- [ ] NFR Requirements — EXECUTE, In Progress
 - [ ] NFR Design — EXECUTE
 - [ ] Infrastructure Design — SKIP
 - [ ] Code Generation — EXECUTE (ALWAYS)
@@ -65,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 1 (Core Template Engine) - Functional Design（成果物生成完了）
-- **Next Stage**: Unit 1 - NFR Requirements
-- **Status**: Pending user approval of functional design
+- **Current Stage**: Unit 1 (Core Template Engine) - NFR Requirements
+- **Next Stage**: Unit 1 - NFR Design
+- **Status**: In Progress

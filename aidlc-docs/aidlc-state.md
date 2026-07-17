@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-18T04:02:00Z
-- **Current Stage**: INCEPTION - Application Design
+- **Current Stage**: INCEPTION - Units Generation
 
 ## Workspace State
 - **Existing Code**: No
@@ -34,8 +34,8 @@
 - [x] Requirements Analysis — Complete, Approved (2026-07-18T04:52:00Z)
 - [x] User Stories — Skipped (開発者向けライブラリ/CLIで明確なユーザーペルソナなし)
 - [x] Workflow Planning — Complete, Approved (2026-07-18T05:00:00Z)
-- [ ] Application Design — EXECUTE, In Progress
-- [ ] Units Generation — EXECUTE
+- [x] Application Design — Complete, Approved (2026-07-18T05:17:00Z)
+- [ ] Units Generation — EXECUTE, In Progress
 
 ### 🟢 CONSTRUCTION PHASE
 - [ ] Functional Design — EXECUTE (per-unit)
@@ -50,6 +50,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: INCEPTION
-- **Current Stage**: Application Design（成果物生成完了）
-- **Next Stage**: Units Generation
-- **Status**: Pending user approval of application design
+- **Current Stage**: Units Generation（Planning）
+- **Next Stage**: CONSTRUCTION PHASE（Unit 1: Core Template Engine）
+- **Status**: Units Generation計画作成中

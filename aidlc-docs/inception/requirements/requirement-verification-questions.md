@@ -31,6 +31,8 @@ X) Other (please describe after [Answer]: tag below)
 
 [Answer]: D
 
+**補足**: CLI提供時の制約はQuestion 3の補足決定事項を参照（ラムダ非対応）。
+
 ## Question 3: サポートするMustache仕様の範囲
 どの範囲のMustache仕様をサポートしますか？
 

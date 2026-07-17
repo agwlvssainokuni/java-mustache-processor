@@ -285,3 +285,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Functional Design (PBT-01是正、記録)
 
 ---
+
+## NFR Requirements (core) - 質問提示
+**Timestamp**: 2026-07-18T06:22:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/core-nfr-requirements-plan.md を作成。Scalability/Availability/Usabilityはrequirements.md(NFR-1/NFR-5)・ライブラリの性質からN/Aと判断し理由を明記。Security（FilePartialResolverのパストラバーサル対策、依存関係脆弱性スキャンツール、例外メッセージのハードニング方針）、Tech Stack（PBTフレームワーク=jqwikのバージョン確定）、Reliability（スレッドセーフ性の検証方法）、Maintainability（公開APIのJavadoc要否）の計6問を作成。回答待ち。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Requirements (Step 2-4)
+
+---

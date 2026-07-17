@@ -211,3 +211,11 @@
 **Context**: INCEPTION - Application Design 完了。Units Generationへ進む。
 
 ---
+
+## Units Generation - 質問提示（Part 1 Planning）
+**Timestamp**: 2026-07-18T05:19:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/inception/plans/unit-of-work-plan.md を作成。User StoriesがSkip済みのため、ストーリー対応の代わりに要件(FR/NFR)とUnitの対応をマッピングする方針を明記。Unit構成の確定（2 Unit案 vs specテスト用の3つ目のUnit追加）、バージョニング単位、Gradleディレクトリ構成、テストコード配置、チーム・所有権境界の計5問を作成。回答待ち。"
+**Context**: INCEPTION - Units Generation Part1 (Step 3-5)
+
+---

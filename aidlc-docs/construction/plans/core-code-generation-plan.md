@@ -4,7 +4,7 @@
 
 ## Unit Context
 
-- **ワークスペースルート**: `/Users/agawa/Documents/project/git/java-mustache-processor`
+- **ワークスペースルート**: `~/Documents/project/git/java-mustache-processor`
 - **プロジェクト種別**: Greenfield / Gradleマルチプロジェクト（monolith構成、`{unit-name}/src/`パターン）
 - **対応要件**（`unit-of-work-story-map.md`より）: FR-1, NFR-1, NFR-3, NFR-4, NFR-6
 - **依存Unit**: なし（`core`は依存を持たない最下層Unit）

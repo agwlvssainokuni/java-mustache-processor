@@ -359,3 +359,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation (Part1 Step 4-6)
 
 ---
+
+## Code Generation (core) - Part1 プラン修正
+**Timestamp**: 2026-07-18T06:50:00Z
+**User Input**: "ワークスペースルートは~/Documents表記でお願い。"
+**AI Response**: "core-code-generation-plan.md の「ワークスペースルート」表記を絶対パス`/Users/agawa/Documents/project/git/java-mustache-processor`から`~/Documents/project/git/java-mustache-processor`に修正。生成計画の内容・ステップ構成に変更なし。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation (Part1、承認前の軽微な表記修正)
+
+---

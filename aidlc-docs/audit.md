@@ -562,3 +562,12 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Requirements（ユーザーレビュー、指摘3点いずれも承認・変更なし）
 
 ---
+
+## NFR Requirements (cli) - 承認
+**Timestamp**: 2026-07-18T09:37:00Z
+**AI Prompt**: "🔧 Request Changes / ✅ Continue to Next Stage"
+**User Response**: "Continue to Next Stage"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit2(cli) NFR Requirements 完了。NFR Design (Unit 2: cli) へ進む。
+
+---

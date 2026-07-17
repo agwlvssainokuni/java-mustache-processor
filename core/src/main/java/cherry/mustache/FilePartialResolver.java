@@ -15,6 +15,9 @@
  */
 package cherry.mustache;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -25,6 +28,8 @@ import java.nio.file.Path;
  * 基準ディレクトリ外を指すパーシャル名は未解決（{@code null}）として扱う（NFR-SEC-1、パストラバーサル対策）。
  */
 public final class FilePartialResolver implements PartialResolver {
+
+    private static final Logger log = LoggerFactory.getLogger(FilePartialResolver.class);
 
     private final Path baseDir;
 
@@ -39,6 +44,7 @@ public final class FilePartialResolver implements PartialResolver {
     public String resolve(String partialName) {
         Path candidate = baseDir.resolve(partialName + ".mustache").normalize();
         if (!candidate.startsWith(baseDir)) {
+            log.warn("Rejected partial name resolving outside baseDir: {}", partialName);
             return null;
         }
         if (!Files.isRegularFile(candidate)) {
@@ -47,6 +53,7 @@ public final class FilePartialResolver implements PartialResolver {
         try {
             return Files.readString(candidate, StandardCharsets.UTF_8);
         } catch (IOException e) {
+            log.debug("Failed to read partial file: {}", partialName, e);
             throw new MustacheRenderException("Failed to read partial file: " + partialName, partialName, e);
         }
     }

@@ -408,3 +408,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2（Step9まで完了、Step10以降は保留）
 
 ---
+
+## Code Generation (core) - ロギング方針の修正（SLF4J採用）
+**Timestamp**: 2026-07-18T07:18:00Z
+**User Input**: "System.out,errは使わない。SLF4Jを使って。"
+**AI Response**: "core配下にSystem.out/errの使用箇所が無いことを確認（現時点では新規採用のみ）。core/build.gradle.ktsにslf4j-api（implementation）とslf4j-simple（testRuntimeOnly）を追加。FilePartialResolverにLoggerを導入し、パストラバーサル拒否時のwarnログ、ファイルI/Oエラー時のdebugログを追加。nfr-requirements.md（SECURITY-03の判定をN/AからCompliantへ修正）とtech-stack-decisions.md（ロギング節を追加）を更新。./gradlew :core:compileJavaでコンパイル確認（BUILD SUCCESSFUL）。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2（Step9まで完了、ユーザー指示によるロギング方針修正、Step10以降は保留継続）
+
+---

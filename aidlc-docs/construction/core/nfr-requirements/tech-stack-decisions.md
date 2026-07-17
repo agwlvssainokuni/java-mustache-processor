@@ -17,6 +17,11 @@ requirements.md（NFR-2, NFR-3, NFR-6）および本ステージの回答結果�
 - **依存関係脆弱性スキャン**: OWASP Dependency-Check Gradleプラグイン（`org.owasp.dependencycheck`）を導入する（Q2=A）
   - 実行タイミング・失敗時のビルド停止条件（しきい値）はBuild and Testステージで確定する
 
+## ロギング（Code Generationステージでユーザー指示により確定）
+- **ログAPI**: SLF4J（`org.slf4j:slf4j-api`）を`implementation`スコープで導入する。`System.out`/`System.err`は使用しない
+- coreは特定のロギング実装（Logback等）には依存せず、`slf4j-api`のみに依存する。実行環境で使用するバインディング（実装）の選定は呼び出し側アプリケーションに委ねる（ライブラリ設計のベストプラクティス）
+- テストスコープでは`org.slf4j:slf4j-simple`を`testRuntimeOnly`として導入し、テスト実行時のログ出力を可能にする
+
 ## 公式Mustache specテストスイートの取り込み
 - BR-2のスコープ（コア6ファイル + `~lambdas.yml`）に対応するYAMLファイルをテストリソースとして`core/src/test/resources`配下に配置する
 - YAMLパース用ライブラリの選定（例: SnakeYAML）はCode Generationステージで確定する（coreの本体実装にはYAML依存を持ち込まず、テストスコープの依存として分離する）

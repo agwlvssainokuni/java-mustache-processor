@@ -28,7 +28,7 @@
 - C) 特に制限を設けない（呼び出し側が信頼できる`baseDir`とパーシャル名のみを渡す前提とする）
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: 依存関係の脆弱性スキャン（SECURITY-10）
 - A) OWASP Dependency-Check Gradleプラグインを導入し、ビルド時に既知脆弱性をスキャンする（推奨。無料・広く使われるOSS）
@@ -36,7 +36,7 @@
 - C) スキャンは行わない（依存関係が少ないため対象外と判断）
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: 例外メッセージのハードニング方針（SECURITY-09）
 `MustacheParseException`/`MustacheRenderException`のメッセージに含めてよい情報の範囲は？
@@ -45,7 +45,7 @@
 - B) 可能な限り詳細な内部情報（スタックトレース全体を文字列化したもの等）をメッセージに含める
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: PBTフレームワークのバージョン確定（PBT-09）
 requirements.mdでjqwikを想定済み。バージョン方針は？
@@ -54,7 +54,7 @@ requirements.mdでjqwikを想定済み。バージョン方針は？
 - B) 特定バージョンをこの場で固定指定する
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ### Question 5: スレッドセーフ性の検証方法（Reliability / BR-10関連）
 Contextはイミュータブル設計とし、同一`Template`インスタンスへの並行`render()`呼び出しを想定している（BR-10）。この性質をどう検証するか？
@@ -63,14 +63,14 @@ Contextはイミュータブル設計とし、同一`Template`インスタンス
 - B) 設計がイミュータブルであることの静的な説明（Javadoc等）のみとし、専用の並行テストは設けない
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ### Question 6: 公開APIのJavadoc要否（Maintainability）
 - A) `core`パッケージの公開クラス・メソッド（`Mustache`, `Template`, `PartialResolver`, `Lambda`, 例外クラス等）にはJavadocを必須とする
 - B) Javadocは任意とし、必須要件にはしない
 - X) Other（自由記述）
 
-[Answer]:
+[Answer]: A
 
 ## Step 4: 曖昧な回答の解析
 （回答収集後に実施）

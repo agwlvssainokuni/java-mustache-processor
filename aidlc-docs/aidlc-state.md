@@ -65,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 1 (Core Template Engine) - NFR Requirements
+- **Current Stage**: Unit 1 (Core Template Engine) - NFR Requirements（成果物生成完了）
 - **Next Stage**: Unit 1 - NFR Design
-- **Status**: In Progress
+- **Status**: Pending user approval of NFR requirements

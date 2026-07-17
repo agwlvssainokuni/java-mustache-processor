@@ -293,3 +293,19 @@
 **Context**: CONSTRUCTION - Unit1(core) NFR Requirements (Step 2-4)
 
 ---
+
+## NFR Requirements (core) - 推奨提示・回答
+**Timestamp**: 2026-07-18T06:26:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q6全問について推奨案（すべてA）と理由を提示 → "全て推奨通り。"
+**AI Response**: "core-nfr-requirements-plan.md のQ1〜Q6に推奨通りの[Answer]: Aを記入（Q1: baseDir外は未解決null扱い, Q2: OWASP Dependency-Check導入, Q3: 内部詳細を含めない例外メッセージ, Q4: jqwik最新安定版, Q5: 並行render()の専用マルチスレッドテスト, Q6: 公開API Javadoc必須）。曖昧な回答なし、追加確認質問は不要と判断。NFR Requirements成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Requirements (Step 5 完了)
+
+---
+
+## NFR Requirements (core) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T06:30:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/core/nfr-requirements/ 配下に nfr-requirements.md（Security: パストラバーサル対策・依存関係脆弱性スキャン・例外メッセージハードニング, Reliability: スレッドセーフ性検証, Maintainability: Javadoc必須, Scalability/Availability/Usabilityは既存要件からN/A、Security Compliance表・PBT Compliance表を含む）, tech-stack-decisions.md（JUnit5, jqwik, OWASP Dependency-Check, specテストリソース配置方針）を作成。Security Baseline/PBT拡張ともにblocking findingなし（全項目Compliant/N/A）。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Requirements (Step 6-7)
+
+---

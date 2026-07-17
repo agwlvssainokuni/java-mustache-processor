@@ -326,3 +326,19 @@
 **Context**: CONSTRUCTION - Unit1(core) NFR Design (Step 2-4)
 
 ---
+
+## NFR Design (core) - 推奨提示・回答
+**Timestamp**: 2026-07-18T06:40:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q3全問について推奨案（すべてA）と理由を提示 → "全て推奨通り。"
+**AI Response**: "core-nfr-design-plan.md のQ1〜Q3に推奨通りの[Answer]: Aを記入（Q1: ファイルI/OエラーはMustacheRenderExceptionでラップ, Q2: グローバル自動キャッシュは設けずTemplateインスタンス再利用のみ, Q3: パス検証ロジックはFilePartialResolver内に直接実装し専用クラスは切り出さない）。曖昧な回答なし、追加確認質問は不要と判断。NFR Design成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Design (Step 5 完了)
+
+---
+
+## NFR Design (core) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T06:43:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/core/nfr-design/ 配下に nfr-design-patterns.md（Resilience: フェイルクローズ＋例外ラップ, Performance: コンパイル済み表現の再利用（グローバルキャッシュなし）, Security: ガード節によるパス検証）, logical-components.md（各コンポーネントとNFRの対応表、外部インフラ的コンポーネントはN/A、テスト関連コンポーネント一覧）を作成。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Design (Step 6-7)
+
+---

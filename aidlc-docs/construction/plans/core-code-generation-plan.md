@@ -18,12 +18,14 @@
 ## ステップ一覧
 
 ### Step 1: Project Structure Setup（Greenfield）
-- [ ] `settings.gradle.kts`（`rootProject.name`、`include("core", "cli")`）
-- [ ] ルート`build.gradle.kts`（共通設定: Java 25 toolchain、UTF-8固定、`group`/`version`一元管理）
-- [ ] Gradle Wrapperの生成（`gradlew`, `gradlew.bat`, `gradle/wrapper/`）
-- [ ] `core/build.gradle.kts`（`java-library`プラグイン、JUnit5/jqwik依存、OWASP Dependency-Checkプラグイン適用）
-- [ ] `core/src/main/java/cherry/mustache/`, `core/src/test/java/cherry/mustache/`, `core/src/test/resources/` ディレクトリ作成
-- [ ] `cli/build.gradle.kts`のプレースホルダー（Unit 2で本実装、ここでは`core`への依存宣言のみ記述しビルドが通る最小構成とする）
+- [x] `settings.gradle.kts`（`rootProject.name`、`include("core", "cli")`）
+- [x] ルート`build.gradle.kts`（共通設定: Java 25 toolchain、UTF-8固定、`group`/`version`一元管理）
+- [x] Gradle Wrapperの生成（`gradlew`, `gradlew.bat`, `gradle/wrapper/`）
+- [x] `core/build.gradle.kts`（`java-library`プラグイン、JUnit5/jqwik依存、OWASP Dependency-Checkプラグイン適用）
+- [x] `core/src/main/java/cherry/mustache/`, `core/src/test/java/cherry/mustache/`, `core/src/test/resources/spec/` ディレクトリ作成
+- [x] `cli/build.gradle.kts`のプレースホルダー（Unit 2で本実装、ここでは`core`への依存宣言のみ記述しビルドが通る最小構成とする）
+- [x] `.gitignore`にGradleビルド生成物（`.gradle/`, `build/`）・OWASP Dependency-Checkデータの除外、`gradle-wrapper.jar`の除外解除を追記
+- [x] `./gradlew build`でビルド疎通確認済み（BUILD SUCCESSFUL）
 
 ### Step 2: 例外階層の生成（domain-entities.md）
 - [ ] `cherry.mustache.MustacheException`（`RuntimeException`継承、`message`/`cause`コンストラクタ）

@@ -367,3 +367,20 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation (Part1、承認前の軽微な表記修正)
 
 ---
+
+## Code Generation (core) - Part1 承認
+**Timestamp**: 2026-07-18T06:51:00Z
+**AI Prompt**: "このプランの内容で生成を進めてよろしいですか？（Request Changes / 承認して生成開始）"
+**User Response**: "承認して生成開始"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part1（Planning）完了。Part2（Generation）へ移行。
+
+---
+
+## Code Generation (core) - Step1完了
+**Timestamp**: 2026-07-18T06:53:00Z
+**User Input**: "OK"（.gitignoreからIDE設定除外セクションを取り除く修正への承認）
+**AI Response**: "settings.gradle.kts、ルートbuild.gradle.kts（Java 25 toolchain・UTF-8・group/version一元管理）、Gradle Wrapper、core/build.gradle.kts（java-library, JUnit5/jqwik/SnakeYAML依存, OWASP Dependency-Checkプラグイン）、cli/build.gradle.ktsプレースホルダー、ディレクトリ構成を生成。.gitignoreにGradle生成物除外を追記（当初IDE設定(.idea/)除外も追加したが、ユーザー指示により削除）。./gradlew buildでビルド疎通確認（BUILD SUCCESSFUL）。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step1完了)
+
+---

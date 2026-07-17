@@ -193,36 +193,61 @@ public final class Parser {
     }
 
     private static void applyStandaloneTrimming(List<Token> tokens) {
+        // トークン列はTEXTとTAGが交互に並ぶ（tokenize()の構造上、TEXTトークンが連続することは無い）ため、
+        // 「行内でこのタグが唯一のコンテンツか」の判定は直前・直後最大2トークンの参照で判定できる。
         for (int i = 0; i < tokens.size(); i++) {
             Token tag = tokens.get(i);
             if (!STANDALONE_ELIGIBLE.contains(tag.type)) {
                 continue;
             }
 
-            Token prevText = (i > 0 && tokens.get(i - 1).type == TokenType.TEXT) ? tokens.get(i - 1) : null;
-            Token nextText = (i < tokens.size() - 1 && tokens.get(i + 1).type == TokenType.TEXT) ? tokens.get(i + 1) : null;
-
+            Token prevText = null;
             String prevTail = "";
             int prevNewline = -1;
-            boolean prevOk = true;
-            if (prevText != null) {
-                prevNewline = prevText.content.lastIndexOf('\n');
-                prevTail = prevText.content.substring(prevNewline + 1);
-                prevOk = isBlank(prevTail);
+            boolean prevOk;
+            if (i == 0) {
+                prevOk = true;
+            } else {
+                Token before = tokens.get(i - 1);
+                if (before.type != TokenType.TEXT) {
+                    prevOk = false;
+                } else {
+                    prevText = before;
+                    prevNewline = before.content.lastIndexOf('\n');
+                    if (prevNewline >= 0) {
+                        prevTail = before.content.substring(prevNewline + 1);
+                        prevOk = isBlank(prevTail);
+                    } else {
+                        prevTail = before.content;
+                        prevOk = isBlank(prevTail) && (i - 2 < 0);
+                    }
+                }
             }
 
+            Token nextText = null;
             int nextNewline = -1;
-            boolean nextOk = true;
-            if (nextText != null) {
-                nextNewline = nextText.content.indexOf('\n');
-                String nextHead = nextNewline >= 0 ? nextText.content.substring(0, nextNewline) : nextText.content;
-                nextOk = isBlank(nextHead);
+            boolean nextOk;
+            if (i == tokens.size() - 1) {
+                nextOk = true;
+            } else {
+                Token after = tokens.get(i + 1);
+                if (after.type != TokenType.TEXT) {
+                    nextOk = false;
+                } else {
+                    nextText = after;
+                    nextNewline = after.content.indexOf('\n');
+                    if (nextNewline >= 0) {
+                        nextOk = isBlank(after.content.substring(0, nextNewline));
+                    } else {
+                        nextOk = isBlank(after.content) && (i + 2 >= tokens.size());
+                    }
+                }
             }
 
             if (prevOk && nextOk) {
                 tag.indent = prevTail;
                 if (prevText != null) {
-                    prevText.content = prevText.content.substring(0, prevNewline + 1);
+                    prevText.content = prevNewline >= 0 ? prevText.content.substring(0, prevNewline + 1) : "";
                 }
                 if (nextText != null) {
                     nextText.content = nextNewline >= 0 ? nextText.content.substring(nextNewline + 1) : "";

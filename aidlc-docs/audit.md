@@ -440,3 +440,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step10完了)
 
 ---
+
+## Code Generation (core) - Step11完了
+**Timestamp**: 2026-07-18T07:58:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "jqwikによるPBTを生成: EscapingPropertyTest（HTMLエスケープ・リスト展開のInvariant、参照エスケーパーをOracleとして使用）, TemplateEquivalencePropertyTest（デリミタ変更の等価性Oracle、非循環パーシャル参照の独立性・決定性）, render/ContextPropertyTest（ドット表記解決 = 手動Map.getのOracle）。実行の結果、Parserのスタンドアロン行判定バグを発見: 同一行に複数タグが隣接する場合（例: `{{>greet}} {{>greet}}`）に両方を誤って単独行と判定していた。BR-4「唯一のコンテンツ」を厳密に満たすようapplyStandaloneTrimmingを修正（前後最大2トークンを参照し、別のタグが同じ行に存在するかを正しく判定するロジックに変更。トークン列がTEXT/TAG交互構造である性質を利用）。./gradlew :core:testで全50件（例示ベース38件＋PBT 12件）成功。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step11完了、Parserバグ修正)
+
+---

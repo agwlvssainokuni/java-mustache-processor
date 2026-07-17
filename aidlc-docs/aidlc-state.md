@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-18T04:02:00Z
-- **Current Stage**: CONSTRUCTION - Unit 1 (Core Template Engine) - Functional Design
+- **Current Stage**: CONSTRUCTION - Unit 2 (CLI Tool) - Functional Design
 
 ## Workspace State
 - **Existing Code**: No
@@ -48,10 +48,10 @@
 - [x] NFR Requirements — Complete, Approved (2026-07-18T06:33:00Z)
 - [x] NFR Design — Complete, Approved (2026-07-18T06:45:00Z)
 - [x] Infrastructure Design — Skipped（クラウドインフラを持たないライブラリのため対象外）
-- [ ] Code Generation — EXECUTE (ALWAYS), In Progress（Part2全15ステップ完了、承認待ち）
+- [x] Code Generation — Complete, Approved (2026-07-18T09:00:00Z)
 
 #### Unit 2: CLI Tool（`cli`）
-- [ ] Functional Design — EXECUTE
+- [ ] Functional Design — EXECUTE, In Progress
 - [ ] NFR Requirements — EXECUTE
 - [ ] NFR Design — EXECUTE
 - [ ] Infrastructure Design — SKIP
@@ -65,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 1 (Core Template Engine) - Code Generation
-- **Next Stage**: Unit 2 (CLI Tool) - Functional Design
+- **Current Stage**: Unit 2 (CLI Tool) - Functional Design
+- **Next Stage**: Unit 2 (CLI Tool) - NFR Requirements
 - **Status**: In Progress

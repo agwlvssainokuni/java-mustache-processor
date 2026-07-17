@@ -513,3 +513,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) Functional Design (Step 6-7)
 
 ---
+
+## Functional Design (cli) - レビュー確認事項の提示・承認
+**Timestamp**: 2026-07-18T09:20:00Z
+**User Input**: "確認すべき事項はありますか？" → AIが4点（1: Jacksonの新規実行時依存化, 2: 標準入力競合検出ルール, 3: 標準入力由来テンプレートのパーシャル未解決時の挙動, 4: 分類不能な例外をRENDER_ERRORに便宜上分類する件）を提示 → ユーザーが個別に "1=OK、Jacksonが新規依存になることを承認します。" / "2=OK、テンプレートとデータが同時に標準入力を要求する場合をNGとすることを承認します。" / "3=OK、コマンドラインオプションで基準ディレクトリを指定すれば良いので。承認します。" / "4=ok" と順次回答
+**AI Response**: "4点すべて承認されたため、business-logic-model.md/business-rules.md/domain-entities.mdの内容に変更なし。レビュー完了と判断。"
+**Context**: CONSTRUCTION - Unit2(cli) Functional Design（ユーザーレビュー、指摘4点いずれも承認・変更なし）
+
+---

@@ -244,3 +244,11 @@
 **Context**: INCEPTION PHASE 完了。CONSTRUCTION PHASE（Unit 1: Core Template Engine）へ進む。
 
 ---
+
+## Functional Design (core) - 質問提示
+**Timestamp**: 2026-07-18T05:58:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/core-functional-design-plan.md を作成。HTMLエスケープ対象文字、公式specテストスイートの対象範囲（コア/~lambdas/~inheritance・~dynamic-names）、Contextのスタック実装方式（イミュータブル/ミュータブル）、POJOプロパティ解決方式（getter/publicフィールド/Record対応）、パーシャル循環参照検出、POJOアクセス時の例外処理、の計6問を作成。Data Flow（永続化）・Integration Points・Frontend Componentsは対象外と判断し理由を明記。回答待ち。"
+**Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 2-4)
+
+---

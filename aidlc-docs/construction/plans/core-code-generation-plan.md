@@ -119,7 +119,7 @@
 - 全196テスト（例示ベース38件＋PBT 12件＋公式spec 146件）成功
 
 ### Step 13: 信頼性テスト（Reliability、nfr-design-patterns.md）
-- [ ] 同一`Template`インスタンスへの並行`render()`呼び出しを検証するマルチスレッドテストを実装（複数スレッドが異なるデータで同時にrenderし、各スレッドの出力が期待値と一致することを確認）
+- [x] `ConcurrentRenderTest.java`: 同一`Template`インスタンスに対し16スレッド×200回、異なるデータで並行`render()`を実行し、各呼び出しの出力が期待値と一致することを確認（NFR-REL-1）。全196+1件成功、回帰なし
 
 ### Step 14: セキュリティツールの設定（SECURITY-10）
 - [ ] `core/build.gradle.kts`にOWASP Dependency-Checkプラグインを適用し、基本設定（失敗しきい値等）を行う

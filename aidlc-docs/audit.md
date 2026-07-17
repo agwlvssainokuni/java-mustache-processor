@@ -277,3 +277,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Functional Design 完了。NFR Requirements (Unit 1: core) へ進む。
 
 ---
+
+## Functional Design (core) - PBT-01不備の是正
+**Timestamp**: 2026-07-18T06:18:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "NFR Requirementsステージ開始前にProperty-Based Testing拡張（PBT-01）を再確認したところ、business-logic-model.mdに必須の「Testable Properties」セクションが欠落していたことを発見。同ファイルに4節として追記（Oracle: 公式specスイート/~lambdas、Invariant: HTMLエスケープ・リスト展開・ドット表記解決・デリミタ変更、Idempotence相当: 非循環パーシャル参照、Round-tripはcoreの範囲に該当なしと明記）。承認済みのビジネスルール・設計判断自体には変更なく、PBT-01の記録漏れを補うものであるため再承認は不要と判断。"
+**Context**: CONSTRUCTION - Unit1(core) Functional Design (PBT-01是正、記録)
+
+---

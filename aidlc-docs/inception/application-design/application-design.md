@@ -25,6 +25,7 @@
 | `Context` | 処理コンポーネント | Map/POJO解決、ドット表記、コンテキストスタック |
 | `PartialResolver` | インターフェース | パーシャル名→テンプレート文字列の解決契約 |
 | `MapPartialResolver` | デフォルト実装 | Mapベースのパーシャル解決 |
+| `FilePartialResolver` | 標準実装 | ファイルシステムベースのパーシャル解決（CLI固有の概念を持たない汎用実装） |
 | `Lambda` | 関数型インターフェース | セクション値としてのテキスト処理関数契約 |
 | `MustacheException`系 | 例外 | 共通基底＋Parse/Render種別のサブクラス |
 
@@ -36,7 +37,6 @@
 | `ArgumentParser` | 処理コンポーネント | コマンドライン引数の解析 |
 | `CliArguments` | 値オブジェクト | 解析済み引数の保持 |
 | `DataLoader` | 処理コンポーネント | JSON/YAMLデータの読込・変換 |
-| `FilePartialResolver` | `PartialResolver`実装 | ファイルシステムベースのパーシャル解決 |
 | `OutputWriter` | 処理コンポーネント | 標準出力/ファイルへの結果書き込み |
 | `ExitCode` | enum | エラー種別と終了コードの対応 |
 | `ArgumentException` | 例外（CLI固有） | 引数不正の表現 |
@@ -52,10 +52,10 @@
 
 ## コンポーネント依存関係（概要）
 - モジュール依存: `cli` → `core`（一方向。`core`は`cli`を一切知らない）
-- `core`内部: `Mustache`→`Parser`/`Template`、`Template`→`Renderer`/`Context`/`PartialResolver`、`Renderer`→`ast.*`/`Context`
-- `cli`内部: `Main`→`CliRunner`→（`ArgumentParser`, `DataLoader`, `FilePartialResolver`, `Mustache`/`Template`, `OutputWriter`, `ExitCode`）
+- `core`内部: `Mustache`→`Parser`/`Template`、`Template`→`Renderer`/`Context`/`PartialResolver`、`Renderer`→`ast.*`/`Context`、`MapPartialResolver`/`FilePartialResolver`→`PartialResolver`（実装）
+- `cli`内部: `Main`→`CliRunner`→（`ArgumentParser`, `DataLoader`, `Mustache`/`Template`/`FilePartialResolver`（いずれもcore）, `OutputWriter`, `ExitCode`）
 - 通信パターン: すべて同期的なインプロセスのメソッド呼び出し（非同期・ネットワーク通信なし）
-- `PartialResolver`はStrategyパターンとして`core`/`cli`間の境界を保つ
+- `PartialResolver`はStrategyパターンであり、標準実装（`MapPartialResolver`, `FilePartialResolver`）は両方とも`core`が提供する。`cli`はどのディレクトリを使うかのポリシー決定のみを担う
 
 （依存関係図の詳細は `component-dependency.md` を参照）
 

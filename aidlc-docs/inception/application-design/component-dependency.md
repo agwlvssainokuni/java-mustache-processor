@@ -11,12 +11,12 @@
 | `Renderer` | `ast.*`（AST Nodes）, `Context`, `PartialResolver` |
 | `Context` | （なし。純粋なデータ解決ロジック） |
 | `MapPartialResolver` | `PartialResolver`（interface実装） |
+| `FilePartialResolver` | `PartialResolver`（interface実装） |
 | `Lambda` | （なし。呼び出し側が実装する契約のみ） |
-| `CliRunner` | `ArgumentParser`, `DataLoader`, `FilePartialResolver`, `Mustache`, `Template`, `OutputWriter`, `ExitCode` |
+| `CliRunner` | `ArgumentParser`, `DataLoader`, `FilePartialResolver`（core）, `Mustache`, `Template`, `OutputWriter`, `ExitCode` |
 | `Main` | `CliRunner`, `ExitCode` |
 | `ArgumentParser` | `CliArguments`, `ArgumentException` |
 | `DataLoader` | `CliArguments`（JSON/YAMLパーサーライブラリはNFR Requirementsで選定） |
-| `FilePartialResolver` | `PartialResolver`（core、interface実装） |
 | `OutputWriter` | `CliArguments` |
 
 ## モジュール（Gradleサブプロジェクト）間の依存
@@ -41,6 +41,7 @@ flowchart TB
         Context["Context"]
         PartialResolver["PartialResolver<br/>(interface)"]
         MapPartialResolver["MapPartialResolver"]
+        FilePartialResolver["FilePartialResolver"]
         Lambda["Lambda<br/>(interface)"]
         Exceptions["MustacheException 系"]
     end
@@ -50,7 +51,6 @@ flowchart TB
         CliRunner["CliRunner"]
         ArgumentParser["ArgumentParser"]
         DataLoader["DataLoader"]
-        FilePartialResolver["FilePartialResolver"]
         OutputWriter["OutputWriter"]
         ExitCode["ExitCode"]
     end
@@ -88,15 +88,15 @@ flowchart TB
 [core] Template --> Renderer, Context, PartialResolver
 [core] Renderer --> ast.*(Node群), Context
 [core] MapPartialResolver ..implements.. PartialResolver
+[core] FilePartialResolver ..implements.. PartialResolver
 
 [cli] Main --> CliRunner
-[cli] CliRunner --> ArgumentParser, DataLoader, FilePartialResolver, OutputWriter, ExitCode
-[cli] CliRunner --> (core) Mustache, Template
-[cli] FilePartialResolver ..implements.. (core) PartialResolver
+[cli] CliRunner --> ArgumentParser, DataLoader, OutputWriter, ExitCode
+[cli] CliRunner --> (core) Mustache, Template, FilePartialResolver
 
 依存方向: cli サブプロジェクト → core サブプロジェクト（一方向、逆方向の依存なし）
 ```
 
 ## 通信パターン
 - コンポーネント間はすべて**同期的な直接メソッド呼び出し**（インプロセス）。非同期処理・メッセージング・ネットワーク通信は存在しない
-- `PartialResolver`はStrategyパターンとして機能し、`core`はCLI固有の実装（`FilePartialResolver`）を一切知らない（`cli`→`core`の一方向依存を維持するための設計）
+- `PartialResolver`はStrategyパターンとして機能する。標準実装（`MapPartialResolver`, `FilePartialResolver`）はいずれも`core`が提供し、CLI固有の概念を含まない汎用クラスとして設計する（`cli`→`core`の一方向依存を維持するための設計）。「どのディレクトリを使うか」というポリシー決定のみ`cli`（`CliRunner`）の責務とする

@@ -35,6 +35,10 @@
 - `MapPartialResolver(Map<String, String> partials)` — コンストラクタ
 - `String resolve(String partialName)` — `PartialResolver`実装
 
+### `FilePartialResolver`
+- `FilePartialResolver(Path baseDir)` — コンストラクタ（探索基準ディレクトリを指定）
+- `String resolve(String partialName)` — `PartialResolver`実装（ファイル探索）
+
 ### `Lambda`（functional interface）
 - `String execute(String text)` — セクション内の生テキスト（未レンダリング）を受け取り、置換後の文字列を返す
 
@@ -59,10 +63,6 @@
 
 ### `DataLoader`
 - `Map<String, Object> load(CliArguments args, InputStream stdin)` — `--data`やフォーマット指定に基づきJSON/YAMLを読み込みMapへ変換する
-
-### `FilePartialResolver`
-- `FilePartialResolver(Path baseDir)` — コンストラクタ（探索基準ディレクトリを指定）
-- `String resolve(String partialName)` — `PartialResolver`実装（ファイル探索）
 
 ### `OutputWriter`
 - `void write(String content, CliArguments args, PrintStream stdout)` — `--output`指定の有無に応じ標準出力/ファイルへ書き込む

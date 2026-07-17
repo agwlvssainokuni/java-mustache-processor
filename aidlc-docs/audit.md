@@ -194,3 +194,11 @@
 **Context**: INCEPTION - Application Design (Step 10〜12)
 
 ---
+
+## Application Design - レビュー指摘・修正（FilePartialResolverの配置）
+**Timestamp**: 2026-07-18T05:14:00Z
+**User Input**: "FilePartialResolverはcoreに無くても良い？" → AIが「ファイルベースのパーシャル解決はCLI固有ではなく汎用的に有用なため、MapPartialResolverと同様coreの標準実装とすべき」と回答し提案 → "yes"
+**AI Response**: "components.md, component-methods.md, component-dependency.md, application-design.md を更新。FilePartialResolverを cli パッケージから core パッケージ（cherry.mustache.FilePartialResolver）へ移動。cliのCliRunnerはベースディレクトリ決定ポリシー（テンプレートと同一ディレクトリ既定/オプションで上書き）のみを保持し、coreのFilePartialResolverをそのディレクトリでインスタンス化する形に変更。Mermaid関連図・依存マトリクス・テキスト代替も同期して修正。"
+**Context**: INCEPTION - Application Design (Step 13、ユーザーレビューによる修正)
+
+---

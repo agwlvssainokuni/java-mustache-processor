@@ -47,6 +47,11 @@
 - **種別**: デフォルト実装
 - **責務**: `Map<String, String>`（パーシャル名→テンプレート文字列）を保持し、`PartialResolver`として振る舞う標準実装
 
+### FilePartialResolver（`cherry.mustache.FilePartialResolver`）
+- **種別**: 標準実装
+- **責務**: 指定されたベースディレクトリを起点に、パーシャル名＋拡張子（`.mustache`）でファイルシステムからテンプレート文字列を解決する汎用実装。ファイルベースのパーシャルを扱いたいライブラリ利用者向けの既製クラスとして`core`が提供する（CLI固有の概念は持たない）
+- **注**: 「テンプレートと同一ディレクトリを既定、オプションで上書き」というディレクトリ決定ポリシーはCLI固有の関心事のため、`cli`の`CliRunner`が担い、決定したディレクトリを渡して本クラスをインスタンス化する
+
 ### Lambda（`cherry.mustache.Lambda`）
 - **種別**: 関数型インターフェース
 - **責務**: セクション値としてコンテキストに渡せる「セクション内テキストを処理する関数」の契約を定義する
@@ -73,10 +78,6 @@
 ### DataLoader（`cherry.mustache.cli.DataLoader`）
 - **種別**: 処理コンポーネント
 - **責務**: JSON/YAML形式のデータ（ファイル or 標準入力）を読み込み、`Map<String, Object>`に変換する。ファイル拡張子による自動判定、`--format`指定時はそれを優先する
-
-### FilePartialResolver（`cherry.mustache.cli.FilePartialResolver`）
-- **種別**: `PartialResolver`実装（CLI固有）
-- **責務**: パーシャル名からファイルシステム上の`.mustache`ファイルを解決する。既定はテンプレートと同一ディレクトリ、明示指定があればそのディレクトリを優先する
 
 ### OutputWriter（`cherry.mustache.cli.OutputWriter`）
 - **種別**: 処理コンポーネント

@@ -122,7 +122,9 @@
 - [x] `ConcurrentRenderTest.java`: 同一`Template`インスタンスに対し16スレッド×200回、異なるデータで並行`render()`を実行し、各呼び出しの出力が期待値と一致することを確認（NFR-REL-1）。全196+1件成功、回帰なし
 
 ### Step 14: セキュリティツールの設定（SECURITY-10）
-- [ ] `core/build.gradle.kts`にOWASP Dependency-Checkプラグインを適用し、基本設定（失敗しきい値等）を行う
+- [x] `core/build.gradle.kts`にOWASP Dependency-Checkプラグイン（10.0.4）を適用済み（Step1）。`failBuildOnCVSS = 7.0`、`dependency-check-suppressions.xml`を設定
+- [x] `dependencyCheckAnalyze`等のタスクが正しく登録されていることを`./gradlew :core:tasks`で確認
+- **備考**: `dependencyCheckAnalyze`の実行にはNVD（脆弱性データベース）の初回同期が必要で、ネットワーク環境・NVD APIレート制限により数分〜数十分を要する場合がある。Code Generationステージでは設定の妥当性確認までとし、実際のスキャン実行・CI組み込み手順はBuild and Testステージで確定する
 
 ### Step 15: ドキュメント生成
 - [ ] `aidlc-docs/construction/core/code/code-summary.md`（生成ファイル一覧、テスト構成、既知の制約事項のMarkdownサマリー）を作成

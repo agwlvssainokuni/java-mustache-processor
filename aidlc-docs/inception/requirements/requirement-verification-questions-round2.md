@@ -14,7 +14,7 @@ C) 両方サポートする（Mapを実装したデフォルトリゾルバー�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ## Question 2: パーシャルの解決方法（CLI）
 CLIとして、パーシャルをどのように解決しますか？
@@ -27,7 +27,7 @@ C) 両方サポート（明示指定が無ければテンプレートと同じ�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ## Question 3: CLIの引数指定方法
 CLIの引数はどのような形式にしますか？
@@ -81,7 +81,7 @@ B) エラー種別ごとに異なる終了コード（例: 引数エラー、パ
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ## Question 7: 文字エンコーディング
 テンプレート・データファイルの読み込みエンコーディングはどうしますか？
@@ -92,7 +92,7 @@ B) UTF-8を既定としつつ、CLIではオプションで他エンコーディ
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ## Question 8: 配布方法
 ライブラリの配布方法はどうしますか？
@@ -105,7 +105,7 @@ C) 未定（後続フェーズで判断する）
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ## Question 9: CLIの配布形態
 CLIはどのような形態で配布しますか？
@@ -118,7 +118,7 @@ C) 当面はfat jarのみとし、ネイティブイメージ化は将来検討�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ## Question 10: 依存脆弱性スキャンツールの方向性
 Security Baseline(SECURITY-10)で必須となる依存脆弱性スキャンについて、方向性はどうしますか？
@@ -131,4 +131,4 @@ C) 具体的なツール選定はNFR Requirementsステージで決定する（�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C

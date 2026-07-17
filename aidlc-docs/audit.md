@@ -554,3 +554,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Requirements (Step 6-7)
 
 ---
+
+## NFR Requirements (cli) - レビュー確認事項の提示・承認
+**Timestamp**: 2026-07-18T09:35:00Z
+**User Input**: "確認すべき事項はありますか？" → AIが3点（1: SECURITY-13のcliでの正式クローズ, 2: fat jar自体の起動確認は自動テスト対象外, 3: Shadow pluginの具体的なplugin ID・バージョンは未確定）を提示 → "1=OK, 2=OK, 3=OK"
+**AI Response**: "3点すべて承認されたため、nfr-requirements.md/tech-stack-decisions.mdの内容に変更なし。レビュー完了と判断。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Requirements（ユーザーレビュー、指摘3点いずれも承認・変更なし）
+
+---

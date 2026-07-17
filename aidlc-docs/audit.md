@@ -497,3 +497,19 @@
 **Context**: CONSTRUCTION - Unit2(cli) Functional Design (Step 2-4)
 
 ---
+
+## Functional Design (cli) - 推奨提示・回答
+**Timestamp**: 2026-07-18T09:05:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q9全問について推奨案（すべてA）と理由を提示 → "全て推奨通り。"
+**AI Response**: "cli-functional-design-plan.md のQ1〜Q9に推奨通りの[Answer]: Aを記入（Q1: Jackson統一(databind+dataformat-yaml), Q2: 手書きArgumentParser, Q3: 連結区切りなし, Q4: --output常に上書き, Q5: テンプレートごとの自ディレクトリを既定, Q6: テンプレート位置引数`-`で標準入力, Q7: --help実装, Q8: 終了コード連番(0-4), Q9: --data省略時は標準入力）。曖昧な回答なし、追加確認質問は不要と判断。Functional Design成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit2(cli) Functional Design (Step 5 完了)
+
+---
+
+## Functional Design (cli) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T09:12:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/cli/functional-design/ 配下に business-logic-model.md（CliRunner.runのオーケストレーションフロー、Main.mainの役割、標準入力競合検出、例外種別→ExitCode対応表、パーシャル解決ディレクトリ決定ロジック）, business-rules.md（BR-1〜BR-9: JSON/YAMLライブラリ、引数構文、データ形式判定順序、複数テンプレート連結、パーシャル解決ディレクトリ、出力・上書き、--help、終了コード数値、エラーメッセージ/ログ方針）, domain-entities.md（CliArguments・ExitCode・ArgumentExceptionのフィールド定義、CliRunner内部状態、DataLoader/OutputWriterの入出力型）を作成。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit2(cli) Functional Design (Step 6-7)
+
+---

@@ -530,3 +530,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) Functional Design 完了。NFR Requirements (Unit 2: cli) へ進む。
 
 ---
+
+## NFR Requirements (cli) - 質問提示
+**Timestamp**: 2026-07-18T09:25:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/cli-nfr-requirements-plan.md を作成。Scalability/Performance/Availabilityはrequirements.md(NFR-1/NFR-5)・CLIの性質からN/A、Maintainabilityは公開APIを持たないためN/A、Usabilityは既にbusiness-rules.mdで決定済みのためN/Aと判断し理由を明記。Security（cliモジュールへのOWASP Dependency-Check適用、Jacksonデシリアライズ安全性設定、引数ファイルパスの検証タイミング）、Tech Stack（fat jar構築方式）、Reliability（CLI固有ロジックのテスト方針）の計5問を作成。回答待ち。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Requirements (Step 2-4)
+
+---

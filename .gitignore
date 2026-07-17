@@ -32,3 +32,6 @@ build/
 # OWASP Dependency-Check
 core/dependency-check-data/
 
+# jqwik（Property-Based Testing）の再現用データベース
+.jqwik-database
+

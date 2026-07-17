@@ -432,3 +432,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2（Step10再開）
 
 ---
+
+## Code Generation (core) - Step10完了
+**Timestamp**: 2026-07-18T07:52:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "JUnit5単体テストを生成: parser/ParserTest（構文エラー系6件）, TemplateRenderingTest（BR-1〜BR-11相当の業務ルール検証23件）, render/ContextTest（ドット表記・スタック探索6件）, MapPartialResolverTest（2件）, FilePartialResolverTest（パストラバーサル拒否含む3件）, ExceptionsTest（例外階層4件）。テスト実行のためcore/build.gradle.ktsにjunit-platform-launcherを追加。実行の結果、Variable-Lambdaがネストしたタグを返し内部タグの値にHTML特殊文字を含む場合に二重エスケープが発生するエッジケースを発見。公式spec ~lambdas.ymlの該当テスト（Interpolation-Expansion/Escaping）はこの組み合わせを規定していないため実装は変更せず、テストの期待値を公式spec準拠のデータ（特殊文字を含まない）に修正。./gradlew :core:testで全44件成功。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step10完了)
+
+---

@@ -351,3 +351,11 @@
 **Context**: CONSTRUCTION - Unit1(core) NFR Design 完了。Code Generation (Unit 1: core) へ進む。
 
 ---
+
+## Code Generation (core) - Part1 プラン提示
+**Timestamp**: 2026-07-18T06:48:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/core-code-generation-plan.md を作成。全15ステップ（プロジェクト構成、例外階層、ASTドメインモデル、Context、Parser、Renderer、PartialResolver実装群、Lambda、公開API（Mustache/Template）、単体テスト、PBT（jqwik）、公式specテストスイート統合、信頼性（並行render）テスト、OWASP Dependency-Check設定、ドキュメント生成）。API Layer/Repository Layer/Frontend/DB Migration/Deployment Artifactsはライブラリの性質上N/Aと判断し理由を明記。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation (Part1 Step 4-6)
+
+---

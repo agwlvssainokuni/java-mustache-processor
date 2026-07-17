@@ -29,7 +29,7 @@ B) 追加で「公式specテストスイート対応」を独立した3つ目の
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: リリース/バージョニング単位
 `core`と`cli`のバージョン管理はどうしますか？（当面は外部公開しないため実務上の影響は小さいが、Gradleのバージョン設定方針として確認）
@@ -42,7 +42,7 @@ C) 未定・後続フェーズ（NFR Requirements等）で決定する
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: Gradleディレクトリ構成
 マルチプロジェクトのディレクトリ構造はどうしますか？
@@ -53,7 +53,7 @@ B) `modules/core/`, `modules/cli/` のようにサブディレクトリの下に
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: テストコードの配置
 JUnit 5単体テストと、公式Mustache specテストスイート（YAML fixtureを読み込んで実行する準拠テスト）は、どのUnitのどこに配置しますか？
@@ -64,7 +64,7 @@ B) 単体テストは各モジュールの`src/test`に配置しつつ、specテ
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 5: チーム・所有権境界
 現状は単一の開発者による開発と理解していますが、将来的に複数人・複数チームでの分担を想定してUnit境界を設計する必要はありますか？
@@ -75,4 +75,4 @@ B) 必要（想定する分担方法を具体的に記述してください）
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A

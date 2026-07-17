@@ -260,3 +260,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 5 完了)
 
 ---
+
+## Functional Design (core) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T06:10:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/core/functional-design/ 配下に business-logic-model.md（パース処理・レンダリング処理・ラムダ処理・循環参照検出のアルゴリズム）, business-rules.md（BR-1〜BR-11: エスケープ文字・specスコープ・真偽判定・スタンドアロン行・パーシャルインデント・ドット表記・POJO解決順序/例外処理・循環参照・Context実装・デリミタスコープ）, domain-entities.md（AST Node群・Context・PartialResolver実装群・Lambda・例外階層のフィールド定義）を作成。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 6-7)
+
+---

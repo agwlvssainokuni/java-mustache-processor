@@ -65,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 1 (Core Template Engine) - Functional Design
-- **Next Stage**: Unit 1 - Functional Design 質問回答待ち
-- **Status**: Functional Design計画作成中
+- **Current Stage**: Unit 1 (Core Template Engine) - Functional Design（成果物生成完了）
+- **Next Stage**: Unit 1 - NFR Requirements
+- **Status**: Pending user approval of functional design

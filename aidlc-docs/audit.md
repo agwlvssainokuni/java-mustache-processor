@@ -595,3 +595,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Design (Step 6-7)
 
 ---
+
+## NFR Design (cli) - レビュー確認事項の提示・承認
+**Timestamp**: 2026-07-18T09:50:00Z
+**User Input**: "確認すべき事項はありますか？" → AIが2点（1: catch節の順序への依存という実装パターン, 2: 汎用RuntimeExceptionのcatch-allが予期しないプログラミングバグもRENDER_ERRORとして扱う点）を提示 → "1=OK, 2=OK"
+**AI Response**: "2点すべて承認されたため、nfr-design-patterns.md/logical-components.mdの内容に変更なし。レビュー完了と判断。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Design（ユーザーレビュー、指摘2点いずれも承認・変更なし）
+
+---

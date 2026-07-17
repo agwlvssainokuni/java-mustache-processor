@@ -6,15 +6,15 @@
 
 ## 実行ステップ
 
-- [ ] Step 1: Unit構成の確定（下記質問への回答を踏まえて確定）
-- [ ] Step 2: Unit間依存関係の整理
-- [ ] Step 3: 要件（FR/NFR）とUnitのマッピング
-- [ ] Step 4: コード構成（ディレクトリ構造）の確定（Greenfield）
-- [ ] Step 5: 成果物生成
-  - [ ] `aidlc-docs/inception/application-design/unit-of-work.md`
-  - [ ] `aidlc-docs/inception/application-design/unit-of-work-dependency.md`
-  - [ ] `aidlc-docs/inception/application-design/unit-of-work-story-map.md`（要件マッピング版として作成）
-- [ ] Step 6: Unit境界・依存関係の妥当性検証
+- [x] Step 1: Unit構成の確定（下記質問への回答を踏まえて確定）
+- [x] Step 2: Unit間依存関係の整理
+- [x] Step 3: 要件（FR/NFR）とUnitのマッピング
+- [x] Step 4: コード構成（ディレクトリ構造）の確定（Greenfield）
+- [x] Step 5: 成果物生成
+  - [x] `aidlc-docs/inception/application-design/unit-of-work.md`
+  - [x] `aidlc-docs/inception/application-design/unit-of-work-dependency.md`
+  - [x] `aidlc-docs/inception/application-design/unit-of-work-story-map.md`（要件マッピング版として作成）
+- [x] Step 6: Unit境界・依存関係の妥当性検証
 
 ## 質問
 

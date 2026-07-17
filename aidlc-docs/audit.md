@@ -64,6 +64,14 @@
 
 ---
 
+## Requirements Analysis - Q8〜Q10回答（拡張機能opt-in）
+**Timestamp**: 2026-07-18T04:22:00Z
+**User Input**: "推奨通り。"
+**AI Response**: "Question: Security Extensions に [Answer]: A（Yes）、Question: Resiliency Extensions に [Answer]: B（No）、Question: Property-Based Testing Extension に [Answer]: A（Yes）を記入。全10問の回答が完了。aidlc-state.md の Extension Configuration テーブルを更新（Security Baseline=Yes, Resiliency Baseline=No, Property-Based Testing=Yes）。opt-inされたSecurity BaselineとProperty-Based Testingのフルルールファイル（security-baseline.md, property-based-testing.md）を読み込み完了。Resiliency Baselineはopt-outのためフルルールファイルは読み込まない。"
+**Context**: INCEPTION - Requirements Analysis (Step 5.1 / Step 6 完了)
+
+---
+
 ## Requirements Analysis - Q2への補足追記
 **Timestamp**: 2026-07-18T04:13:00Z
 **User Input**: "Q1, Q2に補足の追記は無くて良い？" → AIがQ1は追記不要、Q2にはQ3の補足決定事項（CLIラムダ非対応）への参照メモを追加することを提案 → "yea"

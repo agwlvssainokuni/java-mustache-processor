@@ -109,7 +109,7 @@ B) No — skip all SECURITY rules (suitable for PoCs, prototypes, and experiment
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ## Question: Resiliency Extensions
 Should the resiliency baseline be applied to this project?
@@ -124,7 +124,7 @@ B) No — skip the resiliency baseline (suitable for PoCs, prototypes, and exper
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ## Question: Property-Based Testing Extension
 Should property-based testing (PBT) rules be enforced for this project?
@@ -137,4 +137,4 @@ C) No — skip all PBT rules
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A

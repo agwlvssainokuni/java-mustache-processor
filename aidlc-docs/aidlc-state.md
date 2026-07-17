@@ -16,8 +16,12 @@
 - **Structure patterns**: See code-generation.md Critical Rules
 
 ## Extension Configuration
-[No extensions opted in yet - to be determined during Requirements Analysis]
+| Extension | Enabled | Decided At |
+|---|---|---|
+| Security Baseline | Yes | Requirements Analysis |
+| Resiliency Baseline | No | Requirements Analysis |
+| Property-Based Testing | Yes | Requirements Analysis |
 
 ## Stage Progress
 - [x] Workspace Detection — Complete (2026-07-18T04:02:00Z)
-- [ ] Requirements Analysis — In Progress
+- [ ] Requirements Analysis — In Progress (全質問回答済み、要件定義書作成へ)

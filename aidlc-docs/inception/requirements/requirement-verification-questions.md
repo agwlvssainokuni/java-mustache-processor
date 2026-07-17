@@ -59,7 +59,9 @@ C) 両方に対応する
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
+
+**補足**: ライブラリAPIはJavaのMap/POJO（A相当）、CLIはJSONに加えYAMLも入力データ形式としてサポートする。
 
 ## Question 5: パフォーマンス要件
 パフォーマンスに関する要件はありますか？

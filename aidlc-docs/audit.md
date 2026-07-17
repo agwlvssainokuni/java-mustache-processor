@@ -24,6 +24,22 @@
 
 ---
 
+## Requirements Analysis - Q4〜Q10 推奨提示
+**Timestamp**: 2026-07-18T04:16:00Z
+**User Input**: "推奨は？"
+**AI Response**: "Q4=C(両方), Q5=A(特になし), Q6=B(Maven/Java21), Q7=B(単体テスト+specスイート), Q8=A(Security拡張Yes), Q9=B(Resiliency拡張No), Q10=A(PBT拡張Yes) を理由とともに提示。ユーザーの確認待ち。"
+**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
+
+---
+
+## Requirements Analysis - Q4回答
+**Timestamp**: 2026-07-18T04:17:00Z
+**User Input**: "Q4は推奨通り。ライブラリはA, CLIはJSON, YAMLとしたい。"
+**AI Response**: "Question 4 に [Answer]: C を記入。補足として『ライブラリAPIはJavaのMap/POJO、CLIはJSONに加えYAMLも入力データ形式としてサポートする』を追記。"
+**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
+
+---
+
 ## Requirements Analysis - Q2への補足追記
 **Timestamp**: 2026-07-18T04:13:00Z
 **User Input**: "Q1, Q2に補足の追記は無くて良い？" → AIがQ1は追記不要、Q2にはQ3の補足決定事項（CLIラムダ非対応）への参照メモを追加することを提案 → "yea"

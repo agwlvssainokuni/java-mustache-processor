@@ -46,7 +46,7 @@
 #### Unit 1: Core Template Engine（`core`）
 - [x] Functional Design — Complete, Approved (2026-07-18T06:15:00Z)
 - [x] NFR Requirements — Complete, Approved (2026-07-18T06:33:00Z)
-- [ ] NFR Design — EXECUTE, In Progress
+- [ ] NFR Design — EXECUTE, In Progress（質問提示済み）
 - [ ] Infrastructure Design — SKIP
 - [ ] Code Generation — EXECUTE (ALWAYS)
 

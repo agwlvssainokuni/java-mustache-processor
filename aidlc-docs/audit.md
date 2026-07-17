@@ -318,3 +318,11 @@
 **Context**: CONSTRUCTION - Unit1(core) NFR Requirements 完了。NFR Design (Unit 1: core) へ進む。
 
 ---
+
+## NFR Design (core) - 質問提示
+**Timestamp**: 2026-07-18T06:36:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/core-nfr-design-plan.md を作成。Scalability PatternsとLogical Componentsはnfr-requirements.md/既存のドメインモデルからN/Aと判断し理由を明記。Resilience（FilePartialResolverのファイルI/Oエラー処理）、Performance（パース結果再利用のキャッシュパターン）、Security（パストラバーサル検証の実装パターン）の計3問を作成。回答待ち。"
+**Context**: CONSTRUCTION - Unit1(core) NFR Design (Step 2-4)
+
+---

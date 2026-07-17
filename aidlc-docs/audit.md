@@ -392,3 +392,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step2完了)
 
 ---
+
+## Code Generation (core) - Step3〜9完了
+**Timestamp**: 2026-07-18T07:10:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "ASTドメインモデル（Node, TextNode, VariableNode, UnescapedVariableNode, SectionNode, InvertedSectionNode, CommentNode, PartialNode, RootNode, Reparser, HtmlEscaper, Truthiness, LambdaSupport）、Context（PojoResolver, Lookup含む、BR-6/BR-7/BR-10準拠）、Parser（タグスキャン・スタンドアロン行トリミング・スタックベースツリー構築）、Renderer + RenderSession（PartialResolver・Lambda再パース・循環参照検出を束ねる実装上の追加クラス）、PartialResolver実装群（Map/File、パストラバーサル対策込み）、Lambda、公開API（Mustache/Template）を生成。Lambda再パースのため各NodeにopenDelimiter/closeDelimiterスナップショットを追加（BR-2.4節を満たすための実装詳細、業務ルール変更ではない）。10ケースのスモークテストで動作確認し、ローカルRecordクラスに対するリフレクションアクセスの不具合（IllegalAccessException）を発見・修正（PojoResolverにsetAccessible(true)追加）。./gradlew :core:compileJavaでコンパイル確認（BUILD SUCCESSFUL）。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step3〜9完了)
+
+---

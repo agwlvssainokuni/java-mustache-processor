@@ -34,48 +34,55 @@
 - 対応BR: BR-8, BR-9 / 対応SECURITY: SECURITY-09, SECURITY-15
 
 ### Step 3: ASTドメインモデルの生成（domain-entities.md）
-- [ ] `cherry.mustache.ast.Node`（抽象基底、`render(Context, PartialResolver, Writer)`）
-- [ ] `cherry.mustache.ast.TextNode`
-- [ ] `cherry.mustache.ast.VariableNode`
-- [ ] `cherry.mustache.ast.UnescapedVariableNode`
-- [ ] `cherry.mustache.ast.SectionNode`（`rawText`フィールド含む）
-- [ ] `cherry.mustache.ast.InvertedSectionNode`
-- [ ] `cherry.mustache.ast.CommentNode`
-- [ ] `cherry.mustache.ast.PartialNode`
+- [x] `cherry.mustache.ast.Node`（抽象基底、`render(Context, RenderSession, Writer)`）
+- [x] `cherry.mustache.ast.TextNode`
+- [x] `cherry.mustache.ast.VariableNode`
+- [x] `cherry.mustache.ast.UnescapedVariableNode`
+- [x] `cherry.mustache.ast.SectionNode`（`rawText`フィールド含む）
+- [x] `cherry.mustache.ast.InvertedSectionNode`
+- [x] `cherry.mustache.ast.CommentNode`
+- [x] `cherry.mustache.ast.PartialNode`
+- [x] `cherry.mustache.ast.RootNode`（ASTルート、domain-entities.mdには無いが複数の子ノードを束ねる実装上必要な追加ノード）
+- [x] `cherry.mustache.ast.Reparser`（functional interface、Lambda出力・パーシャル本文の再パース用コールバック。`ast`が`parser`パッケージへ直接依存しないための抽象化、実装上の追加）
+- [x] `cherry.mustache.ast.HtmlEscaper` / `Truthiness` / `LambdaSupport`（package-private内部ユーティリティ）
 - 対応BR: BR-1〜BR-6, BR-11
+- **実装上の補足**: Lambda再パースはBR-2.4節「現在のデリミタで再パース」を満たすため、`SectionNode`/`VariableNode`/`UnescapedVariableNode`に`openDelimiter`/`closeDelimiter`スナップショットを追加（domain-entities.mdのフィールド一覧には無いが、承認済みの業務ルールを満たすための実装詳細であり業務ルール自体への変更ではない）
 
 ### Step 4: Contextの生成（domain-entities.md, BR-6, BR-10）
-- [ ] `cherry.mustache.render.Context`（イミュータブル、`data`/`parent`フィールド、`resolve(String)`/`push(Object)`）
-- [ ] POJOプロパティ解決ロジック（getter→Recordアクセサ→publicフィールド、BR-7）をContext内部または専用ヘルパーとして実装
+- [x] `cherry.mustache.render.Context`（イミュータブル、`data`/`parent`フィールド、`resolve(String)`/`push(Object)`）
+- [x] POJOプロパティ解決ロジック（getter→Recordアクセサ→publicフィールド、BR-7）を`PojoResolver`（package-private）として実装
+- [x] `cherry.mustache.render.Lookup`（package-private record、「未解決」と「解決結果がnull」を区別する内部ヘルパー）
 - 対応BR: BR-6, BR-7, BR-10
 
 ### Step 5: Parserの生成（business-logic-model.md 1節）
-- [ ] `cherry.mustache.parser.Delimiters`（内部状態、`open`/`close`）
-- [ ] `cherry.mustache.parser.Parser`（`Node parse(String template)`）
+- [x] `cherry.mustache.parser.Parser`（`Node parse(String template)` / `Node parse(String template, String openDelimiter, String closeDelimiter)`）
   - タグスキャン、タグ種別判定、スタンドアロン行判定・空白除去、スタックベースのツリー構築、パーシャル遅延解決（`PartialNode`生成のみ）
+  - Delimitersは独立クラスとせず、Parser内のローカル変数として実装（domain-entities.mdの意図する「Parser内部の一時状態」を素直に実現）
 - 対応BR: BR-2, BR-4, BR-5, BR-11 / 対応SECURITY: SECURITY-05（入力の構文検証）
 
 ### Step 6: Rendererの生成（business-logic-model.md 2節）
-- [ ] `cherry.mustache.render.Renderer`（`render(Node root, Context context, PartialResolver partialResolver, Writer out)`）
-- [ ] HTMLエスケープ処理（BR-1）
-- [ ] 真偽判定ロジック（BR-3）
-- [ ] ラムダ処理（変数/セクション/否定セクション、BR-2.4節相当）
-- [ ] パーシャル循環参照検出（`resolvingPartials`、呼び出しスタックローカル、BR-9）
+- [x] `cherry.mustache.render.Renderer`（`render(Node root, Context context, PartialResolver partialResolver, Writer out)`）
+- [x] `cherry.mustache.render.RenderSession`（実装上の追加: `PartialResolver`・Lambda再パースコールバック・循環参照検出用`resolvingPartials`集合を1回の`render()`呼び出しスコープで束ねる。component-methods.mdの`PartialResolver`単体パラメータをこのセッションオブジェクトに置き換え）
+- [x] HTMLエスケープ処理（BR-1、`ast.HtmlEscaper`）
+- [x] 真偽判定ロジック（BR-3、`ast.Truthiness`）
+- [x] ラムダ処理（変数/セクション/否定セクション、BR-2.4節相当）
+- [x] パーシャル循環参照検出（`RenderSession.resolvingPartials`、呼び出しスタックローカル、BR-9）
 - 対応BR: BR-1, BR-3, BR-6, BR-8, BR-9
 
 ### Step 7: PartialResolver実装群の生成（domain-entities.md, nfr-design-patterns.md）
-- [ ] `cherry.mustache.PartialResolver`（interface、`resolve(String partialName)`）
-- [ ] `cherry.mustache.MapPartialResolver`
-- [ ] `cherry.mustache.FilePartialResolver`（パス正規化・`baseDir`前方一致ガード節、`IOException`の`MustacheRenderException`ラップ、`try-with-resources`）
+- [x] `cherry.mustache.PartialResolver`（interface、`resolve(String partialName)`）
+- [x] `cherry.mustache.MapPartialResolver`
+- [x] `cherry.mustache.FilePartialResolver`（パス正規化・`baseDir`前方一致ガード節、`IOException`の`MustacheRenderException`ラップ）
 - 対応NFR: NFR-SEC-1（パストラバーサル対策）、Resilience Patterns（I/Oエラー処理）
 
 ### Step 8: Lambdaの生成
-- [ ] `cherry.mustache.Lambda`（functional interface、`String execute(String text)`）
+- [x] `cherry.mustache.Lambda`（functional interface、`String execute(String text)`）
 
 ### Step 9: 公開APIの生成（`Mustache`, `Template`）
-- [ ] `cherry.mustache.Mustache`（static factory: `compile(String)`, `compile(String, PartialResolver)`, `compile(Reader, PartialResolver)`）
-- [ ] `cherry.mustache.Template`（`render(Object)`, `render(Object, Writer)`, `render(Object, PartialResolver)`、内部にコンパイル済みASTを保持し再利用、Performance Patterns準拠）
-- 全公開クラス・メソッドにJavadocを付与（NFR-MNT-1）
+- [x] `cherry.mustache.Mustache`（static factory: `compile(String)`, `compile(String, PartialResolver)`, `compile(Reader, PartialResolver)`）
+- [x] `cherry.mustache.Template`（`render(Object)`, `render(Object, Writer)`, `render(Object, PartialResolver)`、内部にコンパイル済みASTを保持し再利用、Performance Patterns準拠）
+- [x] 全公開クラス・メソッドにJavadocを付与（NFR-MNT-1）
+- [x] 10ケースのスモークテスト（変数展開/エスケープ、リストセクション、否定セクション、スタンドアロン行+パーシャル、デリミタ変更、変数/セクションLambda、POJO Record、ドット表記、Broken Chain）で動作確認。POJOアクセスでローカルRecordクラス（非public宣言クラス）の場合に`IllegalAccessException`が発生する不具合を発見し、`PojoResolver`に`setAccessible(true)`を追加して修正
 
 ### Step 10: Business Logic Unit Testing（JUnit 5）
 - [ ] Parserの単体テスト（BR-1〜BR-6, BR-11それぞれについて代表ケース + 境界値）

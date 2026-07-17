@@ -1,0 +1,296 @@
+package cherry.mustache.parser;
+
+import cherry.mustache.MustacheParseException;
+import cherry.mustache.ast.CommentNode;
+import cherry.mustache.ast.InvertedSectionNode;
+import cherry.mustache.ast.Node;
+import cherry.mustache.ast.PartialNode;
+import cherry.mustache.ast.RootNode;
+import cherry.mustache.ast.SectionNode;
+import cherry.mustache.ast.TextNode;
+import cherry.mustache.ast.UnescapedVariableNode;
+import cherry.mustache.ast.VariableNode;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * テンプレート文字列をASTに変換するパーサー（business-logic-model.md 1節）。
+ * タグスキャン・スタンドアロン行の空白除去・スタックベースのツリー構築を1回のパースパスで行う。
+ */
+public final class Parser {
+
+    private static final String DEFAULT_OPEN = "{{";
+    private static final String DEFAULT_CLOSE = "}}";
+
+    private enum TokenType {
+        TEXT, VARIABLE, UNESCAPED, SECTION_OPEN, INVERTED_OPEN, SECTION_CLOSE, COMMENT, PARTIAL, SET_DELIM
+    }
+
+    private static final Set<TokenType> STANDALONE_ELIGIBLE = EnumSet.of(
+            TokenType.SECTION_OPEN, TokenType.INVERTED_OPEN, TokenType.SECTION_CLOSE,
+            TokenType.COMMENT, TokenType.PARTIAL, TokenType.SET_DELIM);
+
+    private static final class Token {
+        final TokenType type;
+        String content;
+        final int startOffset;
+        final int endOffset;
+        String indent = "";
+
+        Token(TokenType type, String content, int startOffset, int endOffset) {
+            this.type = type;
+            this.content = content;
+            this.startOffset = startOffset;
+            this.endOffset = endOffset;
+        }
+    }
+
+    private static final class Frame {
+        final TokenType type;
+        final String key;
+        final List<Node> children = new ArrayList<>();
+        final String openDelimiter;
+        final String closeDelimiter;
+        final int contentStartOffset;
+
+        Frame(TokenType type, String key, String openDelimiter, String closeDelimiter, int contentStartOffset) {
+            this.type = type;
+            this.key = key;
+            this.openDelimiter = openDelimiter;
+            this.closeDelimiter = closeDelimiter;
+            this.contentStartOffset = contentStartOffset;
+        }
+    }
+
+    /**
+     * @param template テンプレート文字列（デフォルトデリミタ{@code {{ }}}で開始する）
+     * @return ASTルートノード
+     */
+    public Node parse(String template) {
+        return parse(template, DEFAULT_OPEN, DEFAULT_CLOSE);
+    }
+
+    /**
+     * @param template       テンプレート文字列
+     * @param openDelimiter  パース開始時点の開始デリミタ
+     * @param closeDelimiter パース開始時点の終了デリミタ
+     * @return ASTルートノード
+     */
+    public Node parse(String template, String openDelimiter, String closeDelimiter) {
+        List<Token> tokens = tokenize(template, openDelimiter, closeDelimiter);
+        applyStandaloneTrimming(tokens);
+        return buildTree(template, tokens);
+    }
+
+    private List<Token> tokenize(String template, String openDelimiter, String closeDelimiter) {
+        List<Token> tokens = new ArrayList<>();
+        String open = openDelimiter;
+        String close = closeDelimiter;
+        int length = template.length();
+        int textStart = 0;
+        int pos = 0;
+
+        while (pos < length) {
+            int tagStart = template.indexOf(open, pos);
+            if (tagStart < 0) {
+                break;
+            }
+
+            int sigilPos = tagStart + open.length();
+            char sigil = sigilPos < length ? template.charAt(sigilPos) : '\0';
+            TokenType type;
+            String effectiveClose = close;
+            int contentStart;
+
+            if (sigil == '{' && open.equals(DEFAULT_OPEN) && close.equals(DEFAULT_CLOSE)) {
+                type = TokenType.UNESCAPED;
+                contentStart = tagStart + 3;
+                effectiveClose = "}}}";
+            } else if (sigil == '&') {
+                type = TokenType.UNESCAPED;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '#') {
+                type = TokenType.SECTION_OPEN;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '^') {
+                type = TokenType.INVERTED_OPEN;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '/') {
+                type = TokenType.SECTION_CLOSE;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '!') {
+                type = TokenType.COMMENT;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '>') {
+                type = TokenType.PARTIAL;
+                contentStart = sigilPos + 1;
+            } else if (sigil == '=') {
+                type = TokenType.SET_DELIM;
+                contentStart = sigilPos + 1;
+                effectiveClose = "=" + close;
+            } else {
+                type = TokenType.VARIABLE;
+                contentStart = tagStart + open.length();
+            }
+
+            int closeIndex = template.indexOf(effectiveClose, contentStart);
+            if (closeIndex < 0) {
+                throw new MustacheParseException("Unclosed tag", lineOf(template, tagStart), columnOf(template, tagStart));
+            }
+
+            if (tagStart > textStart) {
+                tokens.add(new Token(TokenType.TEXT, template.substring(textStart, tagStart), textStart, tagStart));
+            }
+
+            String content = template.substring(contentStart, closeIndex).trim();
+            int tagEnd = closeIndex + effectiveClose.length();
+
+            if (type == TokenType.SET_DELIM) {
+                String[] parts = content.split("\\s+");
+                if (parts.length != 2) {
+                    throw new MustacheParseException("Invalid set delimiter tag: " + content,
+                            lineOf(template, tagStart), columnOf(template, tagStart));
+                }
+                open = parts[0];
+                close = parts[1];
+            }
+
+            tokens.add(new Token(type, content, tagStart, tagEnd));
+
+            pos = tagEnd;
+            textStart = tagEnd;
+        }
+
+        if (textStart < length) {
+            tokens.add(new Token(TokenType.TEXT, template.substring(textStart, length), textStart, length));
+        }
+
+        return tokens;
+    }
+
+    private static void applyStandaloneTrimming(List<Token> tokens) {
+        for (int i = 0; i < tokens.size(); i++) {
+            Token tag = tokens.get(i);
+            if (!STANDALONE_ELIGIBLE.contains(tag.type)) {
+                continue;
+            }
+
+            Token prevText = (i > 0 && tokens.get(i - 1).type == TokenType.TEXT) ? tokens.get(i - 1) : null;
+            Token nextText = (i < tokens.size() - 1 && tokens.get(i + 1).type == TokenType.TEXT) ? tokens.get(i + 1) : null;
+
+            String prevTail = "";
+            int prevNewline = -1;
+            boolean prevOk = true;
+            if (prevText != null) {
+                prevNewline = prevText.content.lastIndexOf('\n');
+                prevTail = prevText.content.substring(prevNewline + 1);
+                prevOk = isBlank(prevTail);
+            }
+
+            int nextNewline = -1;
+            boolean nextOk = true;
+            if (nextText != null) {
+                nextNewline = nextText.content.indexOf('\n');
+                String nextHead = nextNewline >= 0 ? nextText.content.substring(0, nextNewline) : nextText.content;
+                nextOk = isBlank(nextHead);
+            }
+
+            if (prevOk && nextOk) {
+                tag.indent = prevTail;
+                if (prevText != null) {
+                    prevText.content = prevText.content.substring(0, prevNewline + 1);
+                }
+                if (nextText != null) {
+                    nextText.content = nextNewline >= 0 ? nextText.content.substring(nextNewline + 1) : "";
+                }
+            }
+        }
+    }
+
+    private static boolean isBlank(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c != ' ' && c != '\t' && c != '\r') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Node buildTree(String template, List<Token> tokens) {
+        Deque<Frame> stack = new ArrayDeque<>();
+        stack.push(new Frame(null, null, DEFAULT_OPEN, DEFAULT_CLOSE, 0));
+
+        String currentOpen = DEFAULT_OPEN;
+        String currentClose = DEFAULT_CLOSE;
+
+        for (Token token : tokens) {
+            switch (token.type) {
+                case TEXT -> {
+                    if (!token.content.isEmpty()) {
+                        stack.peek().children.add(new TextNode(token.content));
+                    }
+                }
+                case VARIABLE -> stack.peek().children.add(new VariableNode(token.content, currentOpen, currentClose));
+                case UNESCAPED ->
+                        stack.peek().children.add(new UnescapedVariableNode(token.content, currentOpen, currentClose));
+                case COMMENT -> stack.peek().children.add(new CommentNode(token.content));
+                case PARTIAL -> stack.peek().children.add(new PartialNode(token.content, token.indent));
+                case SET_DELIM -> {
+                    String[] parts = token.content.split("\\s+");
+                    currentOpen = parts[0];
+                    currentClose = parts[1];
+                }
+                case SECTION_OPEN ->
+                        stack.push(new Frame(TokenType.SECTION_OPEN, token.content, currentOpen, currentClose, token.endOffset));
+                case INVERTED_OPEN ->
+                        stack.push(new Frame(TokenType.INVERTED_OPEN, token.content, currentOpen, currentClose, token.endOffset));
+                case SECTION_CLOSE -> {
+                    if (stack.size() <= 1) {
+                        throw new MustacheParseException("Unexpected closing tag: " + token.content,
+                                lineOf(template, token.startOffset), columnOf(template, token.startOffset));
+                    }
+                    Frame frame = stack.pop();
+                    if (!frame.key.equals(token.content)) {
+                        throw new MustacheParseException(
+                                "Mismatched closing tag: expected " + frame.key + " but found " + token.content,
+                                lineOf(template, token.startOffset), columnOf(template, token.startOffset));
+                    }
+                    String rawText = template.substring(frame.contentStartOffset, token.startOffset);
+                    Node node = frame.type == TokenType.INVERTED_OPEN
+                            ? new InvertedSectionNode(frame.key, frame.children)
+                            : new SectionNode(frame.key, frame.children, rawText, frame.openDelimiter, frame.closeDelimiter);
+                    stack.peek().children.add(node);
+                }
+            }
+        }
+
+        if (stack.size() != 1) {
+            Frame unclosed = stack.peek();
+            throw new MustacheParseException("Unclosed section: " + unclosed.key,
+                    lineOf(template, unclosed.contentStartOffset), columnOf(template, unclosed.contentStartOffset));
+        }
+
+        return new RootNode(stack.pop().children);
+    }
+
+    private static int lineOf(String template, int offset) {
+        int line = 1;
+        for (int i = 0; i < offset && i < template.length(); i++) {
+            if (template.charAt(i) == '\n') {
+                line++;
+            }
+        }
+        return line;
+    }
+
+    private static int columnOf(String template, int offset) {
+        int lastNewline = template.lastIndexOf('\n', Math.max(0, offset - 1));
+        return offset - lastNewline;
+    }
+}

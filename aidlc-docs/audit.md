@@ -571,3 +571,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Requirements 完了。NFR Design (Unit 2: cli) へ進む。
 
 ---
+
+## NFR Design (cli) - 質問提示
+**Timestamp**: 2026-07-18T09:40:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/cli-nfr-design-plan.md を作成。Scalability/PerformanceはCLIの性質・既存決定からN/A、Logical Componentsは外部インフラ的コンポーネントを持たないためN/Aと判断し理由を明記。Resilience（例外→ExitCodeマッピングの実装パターン、Jackson例外の扱い（JsonProcessingExceptionがIOExceptionのサブタイプである点に注意）、出力ファイル書き込みエラー時の扱い）、Security（パーシャル解決のパストラバーサル対策の責務分担）の計4問を作成。回答待ち。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Design (Step 2-4)
+
+---

@@ -178,3 +178,11 @@
 **Context**: INCEPTION - Application Design (Step 4-6)
 
 ---
+
+## Application Design - 推奨提示・回答
+**Timestamp**: 2026-07-18T05:05:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q7全問について推奨案（A, A, A, A, A, B, A）と理由を提示 → "全て推奨通り。パッケージ名はcherry.mustache。"
+**AI Response**: "application-design-plan.md の Q1〜Q7に推奨通りの[Answer]を記入（Q1=A:マルチプロジェクト, Q2=A:Parser/AST分離, Q3=A:Renderer/Context分離, Q4=A:Mustacheファクトリ+Template, Q5=A:共通基底例外+サブクラス, Q6=B:CliRunnerサービス層, Q7=A:ポリモーフィズム）。追加決定事項としてベースパッケージ名`cherry.mustache`（core配下は`cherry.mustache.ast`/`parser`/`render`等、cliは`cherry.mustache.cli`）を追記。全質問の回答完了、設計成果物の生成に進む。"
+**Context**: INCEPTION - Application Design (Step 7〜9 完了)
+
+---

@@ -30,7 +30,7 @@ B) 単一プロジェクト内でパッケージのみ分離（例: `com.example
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: パーサーとAST（内部表現）の境界
 テンプレート文字列を解析してASTを構築する処理と、AST自体のデータモデルは、コンポーネントとしてどう分けますか？
@@ -41,7 +41,7 @@ B) 1つの`Parser`コンポーネントにASTノード定義も内包する（�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: レンダリングとコンテキスト解決の境界
 ASTを走査して出力文字列を生成する「レンダリング」処理と、Map/POJOに対してドット表記でプロパティ解決を行う「コンテキスト解決」処理は、別コンポーネントに分けますか？
@@ -52,7 +52,7 @@ B) 1つの`Renderer`コンポーネントに両方の責務を持たせる
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: 公開API（ライブラリファサード）の形
 ライブラリ利用者（Java開発者）向けの公開APIはどのような形にしますか？
@@ -63,7 +63,7 @@ B) 1つの`MustacheEngine`インスタンスを生成し、そのインスタン
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 5: 例外階層とCLI終了コードの対応
 FR-2で「エラー種別ごとに異なる終了コード（引数エラー・パースエラー・レンダリングエラー・I/Oエラー等）」が要件化されています。ライブラリ側の例外設計はどうしますか？
@@ -74,7 +74,7 @@ B) 種別ごとに独立した例外クラス（共通基底なし）を用意�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 6: CLIの内部構成（サービス層の要否）
 CLIツール内部は、引数解析・データ読込（JSON/YAML）・パーシャル解決・ライブラリ呼び出し・出力書き込みをどう構成しますか？
@@ -85,7 +85,7 @@ B) `CliRunner`のようなサービス層コンポーネントを設け、`Main`
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: B
 
 ### Question 7: ASTノードのレンダリング方式（設計パターン）
 AST各ノード（Text, Variable, Section, InvertedSection, Partial, Comment等）をどう描画しますか？
@@ -98,4 +98,10 @@ C) Visitorパターン（`NodeVisitor`インターフェースを定義し、`Re
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
+
+## 追加決定事項
+
+- **パッケージ名（ベース）**: `cherry.mustache`
+  - `core`サブプロジェクト: `cherry.mustache`（ルート）配下に `cherry.mustache.ast`, `cherry.mustache.parser`, `cherry.mustache.render` 等
+  - `cli`サブプロジェクト: `cherry.mustache.cli`

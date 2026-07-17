@@ -25,6 +25,8 @@ import cherry.mustache.ast.SectionNode;
 import cherry.mustache.ast.TextNode;
 import cherry.mustache.ast.UnescapedVariableNode;
 import cherry.mustache.ast.VariableNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ import java.util.Set;
  * タグスキャン・スタンドアロン行の空白除去・スタックベースのツリー構築を1回のパースパスで行う。
  */
 public final class Parser {
+
+    private static final Logger log = LoggerFactory.getLogger(Parser.class);
 
     private static final String DEFAULT_OPEN = "{{";
     private static final String DEFAULT_CLOSE = "}}";
@@ -155,7 +159,7 @@ public final class Parser {
 
             int closeIndex = template.indexOf(effectiveClose, contentStart);
             if (closeIndex < 0) {
-                throw new MustacheParseException("Unclosed tag", lineOf(template, tagStart), columnOf(template, tagStart));
+                throw parseError("Unclosed tag", lineOf(template, tagStart), columnOf(template, tagStart));
             }
 
             if (tagStart > textStart) {
@@ -168,7 +172,7 @@ public final class Parser {
             if (type == TokenType.SET_DELIM) {
                 String[] parts = content.split("\\s+");
                 if (parts.length != 2) {
-                    throw new MustacheParseException("Invalid set delimiter tag: " + content,
+                    throw parseError("Invalid set delimiter tag: " + content,
                             lineOf(template, tagStart), columnOf(template, tagStart));
                 }
                 open = parts[0];
@@ -267,12 +271,12 @@ public final class Parser {
                         stack.push(new Frame(TokenType.INVERTED_OPEN, token.content, currentOpen, currentClose, token.endOffset));
                 case SECTION_CLOSE -> {
                     if (stack.size() <= 1) {
-                        throw new MustacheParseException("Unexpected closing tag: " + token.content,
+                        throw parseError("Unexpected closing tag: " + token.content,
                                 lineOf(template, token.startOffset), columnOf(template, token.startOffset));
                     }
                     Frame frame = stack.pop();
                     if (!frame.key.equals(token.content)) {
-                        throw new MustacheParseException(
+                        throw parseError(
                                 "Mismatched closing tag: expected " + frame.key + " but found " + token.content,
                                 lineOf(template, token.startOffset), columnOf(template, token.startOffset));
                     }
@@ -287,11 +291,16 @@ public final class Parser {
 
         if (stack.size() != 1) {
             Frame unclosed = stack.peek();
-            throw new MustacheParseException("Unclosed section: " + unclosed.key,
+            throw parseError("Unclosed section: " + unclosed.key,
                     lineOf(template, unclosed.contentStartOffset), columnOf(template, unclosed.contentStartOffset));
         }
 
         return new RootNode(stack.pop().children);
+    }
+
+    private static MustacheParseException parseError(String message, int line, int column) {
+        log.debug("Template parse error at line {}, column {}: {}", line, column, message);
+        return new MustacheParseException(message, line, column);
     }
 
     private static int lineOf(String template, int offset) {

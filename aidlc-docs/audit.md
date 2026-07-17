@@ -416,3 +416,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2（Step9まで完了、ユーザー指示によるロギング方針修正、Step10以降は保留継続）
 
 ---
+
+## Code Generation (core) - ログ出力箇所の追加
+**Timestamp**: 2026-07-18T07:22:00Z
+**User Input**: "他にログ出力した方が良さそうなところがあれば追加。"
+**AI Response**: "以下にログを追加: PartialNode（未解決パーシャルをdebug、循環参照検出をwarn。既存の例外送出前）、PojoResolver（POJOアクセサ/フィールドアクセス例外をdebug、既存の例外送出前）、Parser（parseError()ヘルパーに集約し、全MustacheParseException送出箇所でdebugログ）、Template.renderTo()（Writer IOExceptionをdebug）、Mustache.compile(Reader,...)（Reader IOExceptionをdebug）。いずれも例外メッセージ自体は変更せず（SECURITY-09のハードニング方針を維持）、ログのみに詳細情報を出力する方針で統一。./gradlew :core:compileJavaでコンパイル確認（BUILD SUCCESSFUL）。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2（Step9まで完了、ログ出力拡充、Step10以降は保留継続）
+
+---

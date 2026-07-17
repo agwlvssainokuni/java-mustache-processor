@@ -16,6 +16,8 @@
 package cherry.mustache.render;
 
 import cherry.mustache.MustacheRenderException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +29,8 @@ import java.lang.reflect.Modifier;
  * アクセサ呼び出し自体が例外を送出した場合は{@link MustacheRenderException}にラップする（BR-8）。
  */
 final class PojoResolver {
+
+    private static final Logger log = LoggerFactory.getLogger(PojoResolver.class);
 
     private PojoResolver() {
     }
@@ -99,8 +103,10 @@ final class PojoResolver {
         try {
             return method.invoke(target);
         } catch (IllegalAccessException e) {
+            log.debug("Failed to access property '{}'", property, e);
             throw new MustacheRenderException("Failed to access property '" + property + "'", property, e);
         } catch (InvocationTargetException e) {
+            log.debug("Property '{}' accessor threw an exception", property, e.getCause());
             throw new MustacheRenderException("Property '" + property + "' accessor threw an exception", property, e.getCause());
         }
     }
@@ -109,6 +115,7 @@ final class PojoResolver {
         try {
             return field.get(target);
         } catch (IllegalAccessException e) {
+            log.debug("Failed to access field '{}'", property, e);
             throw new MustacheRenderException("Failed to access field '" + property + "'", property, e);
         }
     }

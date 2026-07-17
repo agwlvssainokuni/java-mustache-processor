@@ -17,6 +17,8 @@ package cherry.mustache;
 
 import cherry.mustache.ast.Node;
 import cherry.mustache.parser.Parser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -26,6 +28,8 @@ import java.util.Map;
  * Mustacheテンプレートをコンパイルするためのstaticファクトリ。
  */
 public final class Mustache {
+
+    private static final Logger log = LoggerFactory.getLogger(Mustache.class);
 
     private Mustache() {
     }
@@ -62,6 +66,7 @@ public final class Mustache {
                 sb.append(buffer, 0, read);
             }
         } catch (IOException e) {
+            log.debug("Failed to read template", e);
             throw new MustacheException("Failed to read template", e);
         }
         return compile(sb.toString(), partialResolver);

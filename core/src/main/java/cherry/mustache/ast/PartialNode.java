@@ -18,6 +18,8 @@ package cherry.mustache.ast;
 import cherry.mustache.MustacheRenderException;
 import cherry.mustache.render.Context;
 import cherry.mustache.render.RenderSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -28,6 +30,8 @@ import java.io.Writer;
  * パーシャル内容はコンパイル時には解決せず、レンダリング時に都度{@link cherry.mustache.PartialResolver}で解決する（1.4節）。
  */
 public final class PartialNode extends Node {
+
+    private static final Logger log = LoggerFactory.getLogger(PartialNode.class);
 
     private static final String DEFAULT_OPEN = "{{";
     private static final String DEFAULT_CLOSE = "}}";
@@ -44,9 +48,11 @@ public final class PartialNode extends Node {
     public void render(Context context, RenderSession session, Writer out) throws IOException {
         String partialTemplate = session.partialResolver().resolve(partialName);
         if (partialTemplate == null) {
+            log.debug("Partial not resolved, skipping: {}", partialName);
             return;
         }
         if (!session.beginPartial(partialName)) {
+            log.warn("Circular partial reference detected: {}", partialName);
             throw new MustacheRenderException("Circular partial reference detected: " + partialName, partialName);
         }
         try {

@@ -18,6 +18,8 @@ package cherry.mustache;
 import cherry.mustache.ast.Node;
 import cherry.mustache.render.Context;
 import cherry.mustache.render.Renderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -29,6 +31,8 @@ import java.io.Writer;
  * イミュータブルな{@link Context}に基づくため、同一インスタンスへの並行{@code render()}呼び出しに対して安全（NFR-REL-1）。
  */
 public final class Template {
+
+    private static final Logger log = LoggerFactory.getLogger(Template.class);
 
     private final Node root;
     private final PartialResolver defaultPartialResolver;
@@ -70,6 +74,7 @@ public final class Template {
         try {
             renderer.render(root, new Context(data, null), partialResolver, out);
         } catch (IOException e) {
+            log.debug("Failed to write render output", e);
             throw new MustacheRenderException("Failed to write render output", null, e);
         }
     }

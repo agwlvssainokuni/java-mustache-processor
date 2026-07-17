@@ -24,6 +24,22 @@
 
 ---
 
+## Requirements Analysis - Q3 相談・回答
+**Timestamp**: 2026-07-18T04:10:00Z
+**User Input**: "Q3について推奨は？" → AIがB（公式仕様フルサポート）を推奨し理由を説明 → "Bとします。CLIとして提供する文については、ラムダは難しいという理解で合っていますか？" → AIがCLIではJSON等の静的データしか渡せずラムダを渡す手段がない旨を説明し、A)制約として文書化のみ／B)CLI向け組み込みラムダ機構を用意、の2案を提示しA推奨 → "A"
+**AI Response**: "Question 3 に [Answer]: B を記入。補足決定事項として『ライブラリAPIはラムダ含むフル仕様をサポートするが、CLIモードは入力データがJSON等の静的データに限られるためラムダ非対応と明記する』を追記。"
+**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
+
+---
+
+## Requirements Analysis - Q2への補足追記
+**Timestamp**: 2026-07-18T04:13:00Z
+**User Input**: "Q1, Q2に補足の追記は無くて良い？" → AIがQ1は追記不要、Q2にはQ3の補足決定事項（CLIラムダ非対応）への参照メモを追加することを提案 → "yea"
+**AI Response**: "Question 2 に『補足: CLI提供時の制約はQuestion 3の補足決定事項を参照（ラムダ非対応）。』を追記。"
+**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
+
+---
+
 ## Requirements Analysis - Q4〜Q10 推奨提示
 **Timestamp**: 2026-07-18T04:16:00Z
 **User Input**: "推奨は？"
@@ -69,22 +85,6 @@
 **User Input**: "推奨通り。"
 **AI Response**: "Question: Security Extensions に [Answer]: A（Yes）、Question: Resiliency Extensions に [Answer]: B（No）、Question: Property-Based Testing Extension に [Answer]: A（Yes）を記入。全10問の回答が完了。aidlc-state.md の Extension Configuration テーブルを更新（Security Baseline=Yes, Resiliency Baseline=No, Property-Based Testing=Yes）。opt-inされたSecurity BaselineとProperty-Based Testingのフルルールファイル（security-baseline.md, property-based-testing.md）を読み込み完了。Resiliency Baselineはopt-outのためフルルールファイルは読み込まない。"
 **Context**: INCEPTION - Requirements Analysis (Step 5.1 / Step 6 完了)
-
----
-
-## Requirements Analysis - Q2への補足追記
-**Timestamp**: 2026-07-18T04:13:00Z
-**User Input**: "Q1, Q2に補足の追記は無くて良い？" → AIがQ1は追記不要、Q2にはQ3の補足決定事項（CLIラムダ非対応）への参照メモを追加することを提案 → "yea"
-**AI Response**: "Question 2 に『補足: CLI提供時の制約はQuestion 3の補足決定事項を参照（ラムダ非対応）。』を追記。"
-**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
-
----
-
-## Requirements Analysis - Q3 相談・回答
-**Timestamp**: 2026-07-18T04:10:00Z
-**User Input**: "Q3について推奨は？" → AIがB（公式仕様フルサポート）を推奨し理由を説明 → "Bとします。CLIとして提供する文については、ラムダは難しいという理解で合っていますか？" → AIがCLIではJSON等の静的データしか渡せずラムダを渡す手段がない旨を説明し、A)制約として文書化のみ／B)CLI向け組み込みラムダ機構を用意、の2案を提示しA推奨 → "A"
-**AI Response**: "Question 3 に [Answer]: B を記入。補足決定事項として『ライブラリAPIはラムダ含むフル仕様をサポートするが、CLIモードは入力データがJSON等の静的データに限られるためラムダ非対応と明記する』を追記。"
-**Context**: INCEPTION - Requirements Analysis (Step 6, in progress)
 
 ---
 

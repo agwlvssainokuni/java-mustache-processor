@@ -48,7 +48,7 @@
 - [x] NFR Requirements — Complete, Approved (2026-07-18T06:33:00Z)
 - [x] NFR Design — Complete, Approved (2026-07-18T06:45:00Z)
 - [x] Infrastructure Design — Skipped（クラウドインフラを持たないライブラリのため対象外）
-- [ ] Code Generation — EXECUTE (ALWAYS), In Progress（Part1プラン提示済み、承認待ち）
+- [ ] Code Generation — EXECUTE (ALWAYS), In Progress（Part2全15ステップ完了、承認待ち）
 
 #### Unit 2: CLI Tool（`cli`）
 - [ ] Functional Design — EXECUTE

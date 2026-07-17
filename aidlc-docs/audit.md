@@ -472,3 +472,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step14完了)
 
 ---
+
+## Code Generation (core) - Step15完了・Part2完了
+**Timestamp**: 2026-07-18T08:18:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/core/code/code-summary.mdを作成（生成ファイル一覧28+11、テスト構成197件の内訳、spec実行で発見・是正した実装バグ5件のサマリー、既知の制約事項）。Code Generation (core) Part2の全15ステップが完了。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step15完了、全ステップ完了)
+
+---

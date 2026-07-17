@@ -127,7 +127,7 @@
 - **備考**: `dependencyCheckAnalyze`の実行にはNVD（脆弱性データベース）の初回同期が必要で、ネットワーク環境・NVD APIレート制限により数分〜数十分を要する場合がある。Code Generationステージでは設定の妥当性確認までとし、実際のスキャン実行・CI組み込み手順はBuild and Testステージで確定する
 
 ### Step 15: ドキュメント生成
-- [ ] `aidlc-docs/construction/core/code/code-summary.md`（生成ファイル一覧、テスト構成、既知の制約事項のMarkdownサマリー）を作成
+- [x] `aidlc-docs/construction/core/code/code-summary.md`（生成ファイル一覧、テスト構成、spec実行で発見・是正したバグ5件、既知の制約事項）を作成
 
 ## 対象外（N/A）と判断した項目
 - **API Layer Generation / Repository Layer Generation**: `core`はWeb API・永続化層を持たないライブラリのため対象外（該当ロジックはStep 5〜9の「公開API」「ドメインモデル」に統合済み）

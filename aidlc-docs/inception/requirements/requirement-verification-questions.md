@@ -14,7 +14,7 @@ C) Mustacheテンプレートを別の形式（HTML以外の出力等）に変�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ## Question 2: 利用形態
 このソフトウェアはどのような形で利用されますか？
@@ -29,7 +29,7 @@ D) 上記の組み合わせ（ライブラリ＋CLI等）
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: D
 
 ## Question 3: サポートするMustache仕様の範囲
 どの範囲のMustache仕様をサポートしますか？

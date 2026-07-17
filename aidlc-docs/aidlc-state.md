@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-18T04:02:00Z
-- **Current Stage**: CONSTRUCTION - Unit 2 (CLI Tool) - Functional Design
+- **Current Stage**: CONSTRUCTION - Unit 2 (CLI Tool) - NFR Requirements
 
 ## Workspace State
 - **Existing Code**: No
@@ -51,8 +51,8 @@
 - [x] Code Generation — Complete, Approved (2026-07-18T09:00:00Z)
 
 #### Unit 2: CLI Tool（`cli`）
-- [ ] Functional Design — EXECUTE, In Progress
-- [ ] NFR Requirements — EXECUTE
+- [x] Functional Design — Complete, Approved (2026-07-18T09:22:00Z)
+- [ ] NFR Requirements — EXECUTE, In Progress
 - [ ] NFR Design — EXECUTE
 - [ ] Infrastructure Design — SKIP
 - [ ] Code Generation — EXECUTE (ALWAYS)
@@ -65,6 +65,6 @@
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 2 (CLI Tool) - Functional Design
-- **Next Stage**: Unit 2 (CLI Tool) - NFR Requirements
+- **Current Stage**: Unit 2 (CLI Tool) - NFR Requirements
+- **Next Stage**: Unit 2 (CLI Tool) - NFR Design
 - **Status**: In Progress

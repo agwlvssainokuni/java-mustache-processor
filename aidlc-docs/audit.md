@@ -521,3 +521,12 @@
 **Context**: CONSTRUCTION - Unit2(cli) Functional Design（ユーザーレビュー、指摘4点いずれも承認・変更なし）
 
 ---
+
+## Functional Design (cli) - 承認
+**Timestamp**: 2026-07-18T09:22:00Z
+**AI Prompt**: "🔧 Request Changes / ✅ Continue to Next Stage"
+**User Response**: "Continue to Next Stage"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit2(cli) Functional Design 完了。NFR Requirements (Unit 2: cli) へ進む。
+
+---

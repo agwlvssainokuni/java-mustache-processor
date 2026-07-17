@@ -309,3 +309,12 @@
 **Context**: CONSTRUCTION - Unit1(core) NFR Requirements (Step 6-7)
 
 ---
+
+## NFR Requirements (core) - 承認
+**Timestamp**: 2026-07-18T06:33:00Z
+**AI Prompt**: "🔧 Request Changes / ✅ Continue to Next Stage"
+**User Response**: "Continue to Next Stage"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit1(core) NFR Requirements 完了。NFR Design (Unit 1: core) へ進む。
+
+---

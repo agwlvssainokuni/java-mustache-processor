@@ -72,7 +72,7 @@ B) 高頻度・大量データのレンダリングを想定し、テンプレ�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ## Question 6: ビルドツール・Javaバージョン
 使用するビルドツールとJavaバージョンを教えてください。

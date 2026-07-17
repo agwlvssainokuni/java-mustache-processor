@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-18T04:02:00Z
-- **Current Stage**: INCEPTION - Units Generation
+- **Current Stage**: CONSTRUCTION - Unit 1 (Core Template Engine) - Functional Design
 
 ## Workspace State
 - **Existing Code**: No
@@ -27,6 +27,10 @@
 - **Stages to Execute**: Application Design, Units Generation, Functional Design, NFR Requirements, NFR Design, Code Generation, Build and Test
 - **Stages to Skip**: User Stories（開発者向けライブラリ/CLIで明確なユーザーペルソナなし）, Infrastructure Design（クラウドインフラを持たないライブラリ/CLIのため対象外）
 
+## Units
+- **Unit 1: Core Template Engine**（`core`）— 依存なし
+- **Unit 2: CLI Tool**（`cli`）— Unit 1に依存
+
 ## Stage Progress
 
 ### 🔵 INCEPTION PHASE
@@ -35,21 +39,32 @@
 - [x] User Stories — Skipped (開発者向けライブラリ/CLIで明確なユーザーペルソナなし)
 - [x] Workflow Planning — Complete, Approved (2026-07-18T05:00:00Z)
 - [x] Application Design — Complete, Approved (2026-07-18T05:17:00Z)
-- [ ] Units Generation — EXECUTE, In Progress
+- [x] Units Generation — Complete, Approved (2026-07-18T05:56:00Z)
 
 ### 🟢 CONSTRUCTION PHASE
-- [ ] Functional Design — EXECUTE (per-unit)
-- [ ] NFR Requirements — EXECUTE (per-unit)
-- [ ] NFR Design — EXECUTE (per-unit)
+
+#### Unit 1: Core Template Engine（`core`）
+- [ ] Functional Design — EXECUTE, In Progress
+- [ ] NFR Requirements — EXECUTE
+- [ ] NFR Design — EXECUTE
 - [ ] Infrastructure Design — SKIP
-- [ ] Code Generation — EXECUTE (ALWAYS, per-unit)
+- [ ] Code Generation — EXECUTE (ALWAYS)
+
+#### Unit 2: CLI Tool（`cli`）
+- [ ] Functional Design — EXECUTE
+- [ ] NFR Requirements — EXECUTE
+- [ ] NFR Design — EXECUTE
+- [ ] Infrastructure Design — SKIP
+- [ ] Code Generation — EXECUTE (ALWAYS)
+
+#### 全Unit完了後
 - [ ] Build and Test — EXECUTE (ALWAYS)
 
 ### 🟡 OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER
 
 ## Current Status
-- **Lifecycle Phase**: INCEPTION
-- **Current Stage**: Units Generation（成果物生成完了）
-- **Next Stage**: CONSTRUCTION PHASE（Unit 1: Core Template Engine）
-- **Status**: Pending user approval of units generation
+- **Lifecycle Phase**: CONSTRUCTION
+- **Current Stage**: Unit 1 (Core Template Engine) - Functional Design
+- **Next Stage**: Unit 1 - Functional Design 質問回答待ち
+- **Status**: Functional Design計画作成中

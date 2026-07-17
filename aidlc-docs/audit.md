@@ -489,3 +489,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation 完了。Unit 2 (CLI Tool) - Functional Design へ進む。
 
 ---
+
+## Functional Design (cli) - 質問提示
+**Timestamp**: 2026-07-18T09:02:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/cli-functional-design-plan.md を作成。JSON/YAMLパースライブラリ選定、引数解析方式、複数テンプレート連結時の区切り、`--output`上書き挙動、複数テンプレート時のパーシャル解決ディレクトリ、標準入力からのテンプレート読込指定方法、`--help`オプション提供有無、終了コードの数値割当、`--data`未指定時の挙動の計9問を作成。Data Flow（永続化以外）は該当なし、Frontend Componentsは対象外と判断し理由を明記。回答待ち。"
+**Context**: CONSTRUCTION - Unit2(cli) Functional Design (Step 2-4)
+
+---

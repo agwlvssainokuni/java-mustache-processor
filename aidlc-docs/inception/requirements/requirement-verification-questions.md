@@ -98,7 +98,7 @@ B) 単体テストに加え、Mustache公式のspecテストスイート（仕�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ## Question: Security Extensions
 Should security extension rules be enforced for this project?

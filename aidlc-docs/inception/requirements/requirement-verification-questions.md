@@ -87,7 +87,7 @@ D) Gradle / Java 21
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: X — Gradle（Gradle Wrapper使用）/ Java 25
 
 ## Question 7: テスト要件
 テストについてどこまでの範囲を求めますか？

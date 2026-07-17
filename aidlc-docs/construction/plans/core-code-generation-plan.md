@@ -28,9 +28,9 @@
 - [x] `./gradlew build`でビルド疎通確認済み（BUILD SUCCESSFUL）
 
 ### Step 2: 例外階層の生成（domain-entities.md）
-- [ ] `cherry.mustache.MustacheException`（`RuntimeException`継承、`message`/`cause`コンストラクタ）
-- [ ] `cherry.mustache.MustacheParseException`（`line`, `column`フィールド）
-- [ ] `cherry.mustache.MustacheRenderException`（`key`フィールド、nullable）
+- [x] `cherry.mustache.MustacheException`（`RuntimeException`継承、`message`/`cause`コンストラクタ）
+- [x] `cherry.mustache.MustacheParseException`（`line`, `column`フィールド）
+- [x] `cherry.mustache.MustacheRenderException`（`key`フィールド、nullable）
 - 対応BR: BR-8, BR-9 / 対応SECURITY: SECURITY-09, SECURITY-15
 
 ### Step 3: ASTドメインモデルの生成（domain-entities.md）

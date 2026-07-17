@@ -384,3 +384,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step1完了)
 
 ---
+
+## Code Generation (core) - Step2完了
+**Timestamp**: 2026-07-18T06:55:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "cherry.mustache.MustacheException（message/causeコンストラクタ）, MustacheParseException（line, columnフィールド）, MustacheRenderException（keyフィールド、nullable）を生成。全て公開APIのためJavadoc付与。./gradlew :core:compileJavaでコンパイル確認（BUILD SUCCESSFUL）。"
+**Context**: CONSTRUCTION - Unit1(core) Code Generation Part2 (Step2完了)
+
+---

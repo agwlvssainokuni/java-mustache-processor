@@ -252,3 +252,11 @@
 **Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 2-4)
 
 ---
+
+## Functional Design (core) - 推奨提示・回答
+**Timestamp**: 2026-07-18T06:02:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q6全問について推奨案（A, A, A, C, A, A）と理由を提示 → "全て推奨通り。"
+**AI Response**: "core-functional-design-plan.md のQ1〜Q6に推奨通りの[Answer]を記入（Q1=A:&<>\"の4文字, Q2=A:コア+~lambdas, Q3=A:イミュータブルContext, Q4=C:getter+Recordアクセサ+publicフィールド, Q5=A:循環参照検出しMustacheRenderException, Q6=A:POJO例外はMustacheRenderExceptionでラップ）。曖昧な回答なし、追加確認質問は不要と判断。設計成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit1(core) Functional Design (Step 5 完了)
+
+---

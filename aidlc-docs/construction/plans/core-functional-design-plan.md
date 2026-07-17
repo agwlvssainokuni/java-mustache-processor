@@ -34,7 +34,7 @@ C) リファレンス実装（mustache.js）と同じマッピング（`&`→`&a
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: 公式specテストスイートの対象範囲
 `mustache/spec`リポジトリには、コア仕様（`comments`, `delimiters`, `interpolation`, `inverted`, `partials`, `sections`）に加え、オプション扱いの拡張モジュール（`~lambdas`, `~inheritance`, `~dynamic-names`）があります。NFR-3「公式specテストスイートの全項目合格」の対象範囲はどこまでとしますか？
@@ -47,7 +47,7 @@ C) `~inheritance`・`~dynamic-names`を含む全モジュール（コア＋全�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: Contextのスタック実装方式
 Application Designの未確定事項として残っていた`Context`の実装方式です。
@@ -58,7 +58,7 @@ B) ミュータブル（内部にスタック構造を持ち、`push()`/`pop()`�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: POJOプロパティ解決の方式
 ライブラリ利用者がデータとしてPOJOを渡した場合、プロパティはどう解決しますか？
@@ -71,7 +71,7 @@ C) Java 25のRecord型のアクセサ（`xxx()`、getプレフィックスなし
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: C
 
 ### Question 5: パーシャルの再帰参照（循環参照）検出
 パーシャルAがパーシャルBを含み、BがAを再び含むような循環参照がある場合の挙動はどうしますか？（Security Baseline: SECURITY-09堅牢化・SECURITY-15フェイルセーフの観点）
@@ -82,7 +82,7 @@ B) 特に対策しない（循環参照はテンプレート作者の責任と�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 6: POJOアクセス時の例外処理
 リフレクションによるgetter呼び出し中にPOJO側の実装が例外を送出した場合（例: getterの内部バグ）、どう扱いますか？
@@ -93,4 +93,4 @@ B) キーが見つからなかった場合と同様に扱い、空文字列と�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A

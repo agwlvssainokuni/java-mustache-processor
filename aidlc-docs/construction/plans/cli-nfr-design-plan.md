@@ -25,7 +25,7 @@ B) 各コンポーネントがそれぞれの層で例外を捕捉し、`ExitCod
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: Jackson例外の扱い（Resilience）
 JacksonのJSON/YAML構文エラー時の例外（`JsonProcessingException`とそのサブクラス）は`java.io.IOException`のサブタイプであるため、ファイルI/Oエラー用のcatch節でそのまま捕捉すると`IO_ERROR`に誤分類されてしまう。
@@ -36,7 +36,7 @@ B) `DataLoader`内でJacksonの例外を捕捉し、cli固有の新しい非検�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: パーシャル解決のパストラバーサル対策の責務分担（Security）
 `cli`は`FilePartialResolver`のインスタンス化（基準ディレクトリの決定、BR-5）のみを担当する。パストラバーサル対策自体の実装分担は？
@@ -47,7 +47,7 @@ B) `cli`側でも`--partial-dir`に対する追加のパス検証（正規化・
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: 出力ファイル書き込みエラー時の扱い（Resilience）
 `OutputWriter`がファイル書き込み中に`IOException`（ディスク容量不足、権限エラー等）を検出した場合の扱いは？
@@ -58,10 +58,11 @@ B) 一時ファイルに書き込んでから成功時にのみ最終ファイ�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ## Step 4: 曖昧な回答の解析
-（回答収集後に実施）
+- [x] 全4問がA回答、曖昧な回答なし。追加確認質問は不要と判断
 
 ## Step 5: NFR Design成果物の生成
-（承認後に実施: `nfr-design-patterns.md`, `logical-components.md`）
+- [x] `aidlc-docs/construction/cli/nfr-design/nfr-design-patterns.md`
+- [x] `aidlc-docs/construction/cli/nfr-design/logical-components.md`

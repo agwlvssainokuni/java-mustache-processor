@@ -579,3 +579,19 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Design (Step 2-4)
 
 ---
+
+## NFR Design (cli) - 推奨提示・回答
+**Timestamp**: 2026-07-18T09:43:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q4全問について推奨案（すべてA）と理由を提示 → "全て推奨通り。"
+**AI Response**: "cli-nfr-design-plan.md のQ1〜Q4に推奨通りの[Answer]: Aを記入（Q1: CliRunner.run内の単一try-catchチェーン, Q2: Jackson例外は独自例外にラップせずcatch順序で対処, Q3: パストラバーサル対策はcoreに一任・重複実装なし, Q4: 出力ファイルI/OエラーはそのままIO_ERROR、アトミック書き込みなし）。曖昧な回答なし、追加確認質問は不要と判断。NFR Design成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Design (Step 5 完了)
+
+---
+
+## NFR Design (cli) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T09:47:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/cli/nfr-design/ 配下に nfr-design-patterns.md（Resilience: 例外→ExitCode一元マッピングのcatchチェーン実装（JsonProcessingExceptionの順序注意点含む）・Jackson例外の非ラップ方針・出力ファイルI/Oエラーの非アトミック伝播、Security: パストラバーサル対策のcore一任）, logical-components.md（CliRunner/ArgumentParser/DataLoader/OutputWriter等とNFR対応の一覧、coreコンポーネント再利用表、外部インフラ的コンポーネントN/A、テスト関連コンポーネント対応表）を作成。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Design (Step 6-7)
+
+---

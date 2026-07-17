@@ -538,3 +538,19 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Requirements (Step 2-4)
 
 ---
+
+## NFR Requirements (cli) - 推奨提示・回答
+**Timestamp**: 2026-07-18T09:28:00Z
+**User Input**: "推奨は？" → AIがQ1〜Q5全問について推奨案（すべてA）と理由を提示 → "全て推奨通り。"
+**AI Response**: "cli-nfr-requirements-plan.md のQ1〜Q5に推奨通りの[Answer]: Aを記入（Q1: cli/build.gradle.ktsにもOWASP Dependency-Check適用, Q2: Jackson既定設定＋Map<String,Object>固定, Q3: ファイルパス検証は実行時に検出, Q4: Gradle Shadow plugin, Q5: 標準入出力モック化によるJUnit5単体テストのみ）。曖昧な回答なし、追加確認質問は不要と判断。NFR Requirements成果物の生成に進む。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Requirements (Step 5 完了)
+
+---
+
+## NFR Requirements (cli) - 成果物生成・承認依頼
+**Timestamp**: 2026-07-18T09:32:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/cli/nfr-requirements/ 配下に nfr-requirements.md（Security: cliモジュールのOWASP Dependency-Check適用・Jacksonデシリアライズ安全性・ファイルパス検証タイミング, Reliability: CLI固有ロジックのテスト方針, Scalability/Performance/Availability/Maintainabilityは既存決定・性質からN/A、Security Compliance表・PBT Compliance表を含む）, tech-stack-decisions.md（Jackson, Shadow plugin, OWASP Dependency-Check, JUnit5, SLF4J, 手書きArgumentParserの技術選定）を作成。Security Baseline拡張はblocking findingなし（全項目Compliant/N/A）、PBT拡張は全ルールN/A（PBTはUnit 1の責務と既に確定済み）。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit2(cli) NFR Requirements (Step 6-7)
+
+---

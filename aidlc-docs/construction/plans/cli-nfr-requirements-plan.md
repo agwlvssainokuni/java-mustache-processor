@@ -32,7 +32,7 @@ C) `cli`はスキャン対象外とする
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 2: Jacksonによるデシリアライズの安全性設定（SECURITY-13）
 JSON/YAMLデータの読み込みに`ObjectMapper`を使う際の安全性方針です。
@@ -43,7 +43,7 @@ B) 上記に加え、最大ネスト深さ制限等の追加のハードニン�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 3: コマンドライン引数のファイルパス検証タイミング（SECURITY-05）
 テンプレート/データ/出力/パーシャルディレクトリの各パスについて、存在確認や読み書き可否の検証をいつ行うか？
@@ -54,7 +54,7 @@ B) `ArgumentParser`内で全パスの存在確認を事前にまとめて行い�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 4: fat jar構築方式の選定（NFR-2、Tech Stack Selection）
 A) Gradle Shadow plugin（`com.gradleup.shadow`、旧`com.github.johnrengelman.shadow`の後継）を導入し、依存関係を含む単一の実行可能fat jarを構築する（デファクトスタンダードで設定も比較的シンプル）
@@ -63,7 +63,7 @@ B) `application`プラグインの`distZip`/`distTar`（fat jarではなく、�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ### Question 5: CLI固有ロジックのテスト方針（NFR-3・Reliability）
 `CliRunner.run(args, in, out, err)`は標準入出力を引数として受け取る設計（テスト容易性のため）です。
@@ -74,4 +74,11 @@ B) 上記に加え、fat jarをビルドして実際に`java -jar`でプロセ�
 
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
+
+## Step 4: 曖昧な回答の解析
+- [x] 全5問がA回答、曖昧な回答なし。追加確認質問は不要と判断
+
+## Step 5: NFR Requirements成果物の生成
+- [x] `aidlc-docs/construction/cli/nfr-requirements/nfr-requirements.md`
+- [x] `aidlc-docs/construction/cli/nfr-requirements/tech-stack-decisions.md`

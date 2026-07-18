@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":cherry-mustache-core"))
     implementation("org.slf4j:slf4j-api:2.0.16")
     // cliはライブラリではなくエンドユーザー向け実行可能ツールのため、coreと異なりSLF4Jバインディングを
     // 自身のfat jarに同梱する（呼び出し側にバインディング選定を委ねる必要が無いため）

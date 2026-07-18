@@ -10,35 +10,35 @@
 ### Scenario 1: 変数展開・エスケープ（core → cli）
 - **説明**: `cli`経由でデータファイルを読み込み、`core`の`Mustache.compile`/`Template.render`によるHTMLエスケープ（BR-1）が正しく適用されることを確認する
 - **セットアップ**: テンプレート`Hi, {{name}} & {{{raw}}}`、データ`{"name":"<World>","raw":"<b>ok</b>"}`
-- **テスト手順**: `java -jar cli-*-all.jar --data d1.json t1.mustache`
+- **テスト手順**: `java -jar cherry-mustache-cli-*-all.jar --data d1.json t1.mustache`
 - **期待結果**: `Hi, &lt;World&gt; & <b>ok</b>`、終了コード`0`
 - **実施結果**: ✅ 期待通り（本ステージで実行・確認済み）
 
 ### Scenario 2: パーシャル解決（core `FilePartialResolver` → cli）
 - **説明**: `cli`が構築した`FilePartialResolver`（テンプレートと同一ディレクトリを基準、BR-5）を通じて、`core`が正しくパーシャルを解決できることを確認する
 - **セットアップ**: `partial.mustache`（`{{name}}`）と同一ディレクトリの`t2.mustache`（`Hi, {{>partial}}!`）
-- **テスト手順**: `java -jar cli-*-all.jar --data d1.json t2.mustache`
+- **テスト手順**: `java -jar cherry-mustache-cli-*-all.jar --data d1.json t2.mustache`
 - **期待結果**: `Hi, <World>\n!`相当のエスケープ済み出力、終了コード`0`
 - **実施結果**: ✅ 期待通り（本ステージで実行・確認済み）
 
 ### Scenario 3: テンプレート構文エラーの伝播（core `MustacheParseException` → cli `PARSE_ERROR`）
 - **説明**: `core`が送出する`MustacheParseException`が`cli`のcatchチェーンで正しく`PARSE_ERROR`にマッピングされることを確認する
 - **セットアップ**: 不正なテンプレート`{{#unclosed`
-- **テスト手順**: `java -jar cli-*-all.jar --data d1.json bad.mustache`
+- **テスト手順**: `java -jar cherry-mustache-cli-*-all.jar --data d1.json bad.mustache`
 - **期待結果**: `Error: Unclosed tag`、終了コード`2`
 - **実施結果**: ✅ 期待通り（本ステージで実行・確認済み）
 
 ### Scenario 4: 循環パーシャル参照の伝播（core `MustacheRenderException` → cli `RENDER_ERROR`）
 - **説明**: `core`のネスト深さ上限検出（BR-9）による`MustacheRenderException`が`cli`で正しく`RENDER_ERROR`にマッピングされることを確認する
 - **セットアップ**: 相互に参照し合う`circA.mustache`（`{{>circB}}`）と`circB.mustache`（`{{>circA}}`）
-- **テスト手順**: `java -jar cli-*-all.jar --data d1.json circB.mustache`
+- **テスト手順**: `java -jar cherry-mustache-cli-*-all.jar --data d1.json circB.mustache`
 - **期待結果**: SLF4Jの`WARN`ログ出力後、`Error: Partial nesting too deep, possible circular reference: circA`、終了コード`3`
 - **実施結果**: ✅ 期待通り（本ステージで実行・確認済み）
 
 ### Scenario 5: セクション・リスト展開
 - **説明**: `core`のセクション処理（BR-3）が`cli`経由のJSON配列データに対して正しく機能することを確認する
 - **セットアップ**: テンプレート`{{#items}}[{{.}}]{{/items}}`、データ`{"items":["a","b","c"]}`
-- **テスト手順**: `java -jar cli-*-all.jar --data d5.json t5.mustache`
+- **テスト手順**: `java -jar cherry-mustache-cli-*-all.jar --data d5.json t5.mustache`
 - **期待結果**: `[a][b][c]`、終了コード`0`
 - **実施結果**: ✅ 期待通り（本ステージで実行・確認済み）
 
@@ -46,7 +46,7 @@
 
 ### 1. fat jarのビルド
 ```bash
-./gradlew :cli:shadowJar
+./gradlew :cherry-mustache-cli:shadowJar
 ```
 
 ### 2. テストフィクスチャの配置
@@ -65,4 +65,4 @@
 作業ディレクトリの一時ファイルを削除する（`rm -rf` 対象は自分で作成した一時ディレクトリのみ）。
 
 ## 実施結果（本ステージで実行・確認済み）
-上記5シナリオすべてを実際にfat jar（`cli-0.1.0-SNAPSHOT-all.jar`）で実行し、期待通りの出力・終了コードであることを確認済み。
+上記5シナリオすべてを実際にfat jar（`cherry-mustache-cli-0.1.0-SNAPSHOT-all.jar`）で実行し、期待通りの出力・終了コードであることを確認済み。

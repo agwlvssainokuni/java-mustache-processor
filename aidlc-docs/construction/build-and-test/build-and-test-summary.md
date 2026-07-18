@@ -4,9 +4,9 @@
 - **Build Tool**: Gradle（Gradle Wrapper、Java 25 toolchain）
 - **Build Status**: Success（`./gradlew clean build`、`BUILD SUCCESSFUL`、18 actionable tasks全て実行）
 - **Build Artifacts**:
-  - `core/build/libs/core-0.1.0-SNAPSHOT.jar`
-  - `cli/build/libs/cli-0.1.0-SNAPSHOT.jar`
-  - `cli/build/libs/cli-0.1.0-SNAPSHOT-all.jar`（Shadow plugin、実行可能fat jar）
+  - `cherry-mustache-core/build/libs/cherry-mustache-core-0.1.0-SNAPSHOT.jar`
+  - `cherry-mustache-cli/build/libs/cherry-mustache-cli-0.1.0-SNAPSHOT.jar`
+  - `cherry-mustache-cli/build/libs/cherry-mustache-cli-0.1.0-SNAPSHOT-all.jar`（Shadow plugin、実行可能fat jar）
 - **Build Time**: 約5秒（クリーンビルド）
 
 ## Test Execution Summary

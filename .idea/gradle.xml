@@ -7,8 +7,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/cli" />
-            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/cherry-mustache-cli" />
+            <option value="$PROJECT_DIR$/cherry-mustache-core" />
           </set>
         </option>
       </GradleProjectSettings>

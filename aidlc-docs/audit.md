@@ -678,3 +678,11 @@
 - aidlc-docs/construction/build-and-test/build-and-test-summary.md
 
 ---
+
+## Build and Test - Request Changes（Gradleモジュール名の変更）
+**Timestamp**: 2026-07-18T11:15:00Z
+**User Input**: "アーティファクト名を変えたい。" → [AskUserQuestion: どのアーティファクト名を変更したいか] → "Gradleモジュール名（core/cli）" → "cherry-mustache-core と cherry-mustache-cli"
+**AI Response**: "Gradleモジュールディレクトリを`git mv`で`core`→`cherry-mustache-core`、`cli`→`cherry-mustache-cli`にリネーム。settings.gradle.ktsのinclude()、cherry-mustache-cli/build.gradle.ktsのproject(\":core\")参照を更新。./gradlew clean buildでBUILD SUCCESSFUL・全231テスト成功を確認。生成されるjar名がcherry-mustache-core-0.1.0-SNAPSHOT.jar / cherry-mustache-cli-0.1.0-SNAPSHOT(-all).jarに変わったことを確認。README.mdおよびaidlc-docs/construction/build-and-test/配下の実行コマンド・パス記述（\"生きたドキュメント\"）を新モジュール名に更新。aidlc-state.mdのUnitラベル（`core`→`cherry-mustache-core`, `cli`→`cherry-mustache-cli`）も更新。fat jarで再度スモークテストし正常動作を確認。過去のINCEPTION/CONSTRUCTION設計文書（unit-of-work.md, 各種functional-design/nfr-requirements/nfr-design, code-generation plan等）内の`core`/`cli`という表記は、物理ディレクトリ名ではなくUnitの略称・歴史的記録として残し、遡っての書き換えは行わない方針とした。"
+**Context**: Build and Test（承認前のRequest Changesとして対応。ビルド設定・生きたドキュメントの更新完了）
+
+---

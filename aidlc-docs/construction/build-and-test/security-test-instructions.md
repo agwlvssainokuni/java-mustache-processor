@@ -6,18 +6,18 @@
 
 ### 実行コマンド
 ```bash
-./gradlew :core:dependencyCheckAnalyze
-./gradlew :cli:dependencyCheckAnalyze
+./gradlew :cherry-mustache-core:dependencyCheckAnalyze
+./gradlew :cherry-mustache-cli:dependencyCheckAnalyze
 ```
 （または `./gradlew dependencyCheckAnalyze` で両モジュールを一括実行）
 
 ### 期待される結果
-- CVSSスコア7.0以上の既知脆弱性が検出された場合、`failBuildOnCVSS = 7.0f`設定によりビルドが失敗する（`core/build.gradle.kts`, `cli/build.gradle.kts`で設定済み）
-- 誤検知（false positive）がある場合は`core/dependency-check-suppressions.xml` / `cli/dependency-check-suppressions.xml`に抑制ルールを追記する
-- レポート出力先: `core/build/reports/dependency-check-report.html`, `cli/build/reports/dependency-check-report.html`
+- CVSSスコア7.0以上の既知脆弱性が検出された場合、`failBuildOnCVSS = 7.0f`設定によりビルドが失敗する（`cherry-mustache-core/build.gradle.kts`, `cherry-mustache-cli/build.gradle.kts`で設定済み）
+- 誤検知（false positive）がある場合は`cherry-mustache-core/dependency-check-suppressions.xml` / `cherry-mustache-cli/dependency-check-suppressions.xml`に抑制ルールを追記する
+- レポート出力先: `cherry-mustache-core/build/reports/dependency-check-report.html`, `cherry-mustache-cli/build/reports/dependency-check-report.html`
 
 ### 本ステージでの実施状況: **未完了（環境制約により手動実行が必要）**
-本ステージで`./gradlew :core:dependencyCheckAnalyze`の実行を試みたが、NVD（National Vulnerability Database）の脆弱性データベース初回同期にNVD APIキー無しでは非常に長い時間を要する旨の警告（`An NVD API Key was not provided - it is highly recommended to use an NVD API key as the update can take a VERY long time without an API Key`）が出力され、セッションの実行時間制約内での完了が見込めなかったため中断した。
+本ステージで`./gradlew :cherry-mustache-core:dependencyCheckAnalyze`の実行を試みたが、NVD（National Vulnerability Database）の脆弱性データベース初回同期にNVD APIキー無しでは非常に長い時間を要する旨の警告（`An NVD API Key was not provided - it is highly recommended to use an NVD API key as the update can take a VERY long time without an API Key`）が出力され、セッションの実行時間制約内での完了が見込めなかったため中断した。
 
 **ユーザーによる手動実行が必要**:
 1. [NVD API Key](https://nvd.nist.gov/developers/request-an-api-key)を取得する（無料、即時発行）
@@ -25,14 +25,14 @@
    ```properties
    nvdApiKey=<取得したAPIキー>
    ```
-   または`core/build.gradle.kts`/`cli/build.gradle.kts`の`dependencyCheck { }`ブロックに`nvd.apiKey`設定を追加する
+   または`cherry-mustache-core/build.gradle.kts`/`cherry-mustache-cli/build.gradle.kts`の`dependencyCheck { }`ブロックに`nvd.apiKey`設定を追加する
 3. `./gradlew dependencyCheckAnalyze`を実行する（APIキーがあれば数分程度で完了する）
 4. レポートを確認し、CVSS 7.0以上の指摘があれば依存バージョンの更新または抑制ルールの追加を検討する
 
 ## 2. 入力検証（SECURITY-05）
 
 ### core
-`FilePartialResolver`のパストラバーサル対策（`nfr-design-patterns.md`「Security Patterns」）は、公式Mustache specテストスイート実行時には直接カバーされないため、`FilePartialResolverTest`（`core/src/test/java/cherry/mustache/FilePartialResolverTest.java`）で個別に検証済み（`unit-test-instructions.md`参照）。
+`FilePartialResolver`のパストラバーサル対策（`nfr-design-patterns.md`「Security Patterns」）は、公式Mustache specテストスイート実行時には直接カバーされないため、`FilePartialResolverTest`（`cherry-mustache-core/src/test/java/cherry/mustache/FilePartialResolverTest.java`）で個別に検証済み（`unit-test-instructions.md`参照）。
 
 ### cli
 `DataLoader`のJSON/YAML構文検証、`ArgumentParser`の引数構文検証は`unit-test-instructions.md`のテストで検証済み。追加のペネトレーションテストは、本プロジェクトが外部公開されるネットワークサービスではない（`requirements.md` NFR-2「当面は非公開」）ため対象外と判断する。

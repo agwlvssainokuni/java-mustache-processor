@@ -1,3 +1,3 @@
 rootProject.name = "java-mustache-processor"
 
-include("core", "cli")
+include("cherry-mustache-core", "cherry-mustache-cli")

@@ -28,8 +28,8 @@
 - **Stages to Skip**: User Stories（開発者向けライブラリ/CLIで明確なユーザーペルソナなし）, Infrastructure Design（クラウドインフラを持たないライブラリ/CLIのため対象外）
 
 ## Units
-- **Unit 1: Core Template Engine**（`core`）— 依存なし
-- **Unit 2: CLI Tool**（`cli`）— Unit 1に依存
+- **Unit 1: Core Template Engine**（`cherry-mustache-core`）— 依存なし
+- **Unit 2: CLI Tool**（`cherry-mustache-cli`）— Unit 1に依存
 
 ## Stage Progress
 
@@ -43,14 +43,14 @@
 
 ### 🟢 CONSTRUCTION PHASE
 
-#### Unit 1: Core Template Engine（`core`）
+#### Unit 1: Core Template Engine（`cherry-mustache-core`）
 - [x] Functional Design — Complete, Approved (2026-07-18T06:15:00Z)
 - [x] NFR Requirements — Complete, Approved (2026-07-18T06:33:00Z)
 - [x] NFR Design — Complete, Approved (2026-07-18T06:45:00Z)
 - [x] Infrastructure Design — Skipped（クラウドインフラを持たないライブラリのため対象外）
 - [x] Code Generation — Complete, Approved (2026-07-18T09:00:00Z)
 
-#### Unit 2: CLI Tool（`cli`）
+#### Unit 2: CLI Tool（`cherry-mustache-cli`）
 - [x] Functional Design — Complete, Approved (2026-07-18T09:22:00Z)
 - [x] NFR Requirements — Complete, Approved (2026-07-18T09:37:00Z)
 - [x] NFR Design — Complete, Approved (2026-07-18T09:52:00Z)

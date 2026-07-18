@@ -25,8 +25,8 @@ String result = template.render(Map.of("name", "World")); // "Hello, World!"
 ### ビルドと実行
 
 ```
-./gradlew :cli:shadowJar
-java -jar cli/build/libs/cli-<version>-all.jar [OPTIONS] TEMPLATE...
+./gradlew :cherry-mustache-cli:shadowJar
+java -jar cherry-mustache-cli/build/libs/cherry-mustache-cli-<version>-all.jar [OPTIONS] TEMPLATE...
 ```
 
 ### 使用方法

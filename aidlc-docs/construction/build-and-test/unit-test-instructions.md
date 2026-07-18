@@ -9,18 +9,18 @@
 
 ### 2. モジュール別の実行（任意）
 ```bash
-./gradlew :core:test
-./gradlew :cli:test
+./gradlew :cherry-mustache-core:test
+./gradlew :cherry-mustache-cli:test
 ```
 
 ### 3. テスト結果の確認
 - **期待される結果**: 全231件（core 197件 + cli 34件）成功、失敗0件
 - **テストレポート**:
-  - `core/build/reports/tests/test/index.html`
-  - `cli/build/reports/tests/test/index.html`
+  - `cherry-mustache-core/build/reports/tests/test/index.html`
+  - `cherry-mustache-cli/build/reports/tests/test/index.html`
 - **テスト結果XML**:
-  - `core/build/test-results/test/*.xml`
-  - `cli/build/test-results/test/*.xml`
+  - `cherry-mustache-core/build/test-results/test/*.xml`
+  - `cherry-mustache-cli/build/test-results/test/*.xml`
 
 ### 4. テスト構成の内訳
 
@@ -42,7 +42,7 @@
 
 ### 5. テスト失敗時の対処
 1. 該当モジュールのテストレポート（上記HTML）で失敗ケースの詳細（期待値・実際値・スタックトレース）を確認する
-2. `core`の失敗の場合、多くは公式Mustache仕様（`core/src/test/resources/spec/*.yml`）との差異が原因である可能性が高い。仕様の記述を再確認し、実装（`business-rules.md`の該当BR）またはテスト自体の妥当性を検証する
+2. `core`の失敗の場合、多くは公式Mustache仕様（`cherry-mustache-core/src/test/resources/spec/*.yml`）との差異が原因である可能性が高い。仕様の記述を再確認し、実装（`business-rules.md`の該当BR）またはテスト自体の妥当性を検証する
 3. `cli`の失敗の場合、`ExitCode`マッピング（`business-logic-model.md` 4.1節）やcatch順序（`nfr-design-patterns.mdパターン1・2`）を確認する
 4. 修正後、該当モジュールの`./gradlew :{module}:test`を再実行する
 

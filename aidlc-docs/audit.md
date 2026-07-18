@@ -662,3 +662,19 @@
 **Context**: CONSTRUCTION - Unit2(cli) Code Generation 完了。全Unit（core, cli）のCONSTRUCTION完了。Build and Testへ進む。
 
 ---
+
+## Build and Test Stage
+**Timestamp**: 2026-07-18T11:10:00Z
+**Build Status**: Success
+**Test Status**: Pass（自動実行分）
+**User Input**: (N/A - AI initiated)
+**AI Response**: "./gradlew clean buildでBUILD SUCCESSFUL確認。core 197件+cli 34件=231件全テスト成功（失敗0件）を確認。fat jar（cli-0.1.0-SNAPSHOT-all.jar）を実際にプロセス起動し、統合テスト5シナリオ（変数展開・エスケープ、パーシャル解決、テンプレート構文エラー→PARSE_ERROR伝播、循環パーシャル参照→RENDER_ERROR伝播、セクション・リスト展開）を全て実施しPass。パフォーマンステストはrequirements.md NFR-1によりN/Aと判断。OWASP Dependency-Checkの実スキャンを試行したが、NVD初回同期がAPIキー無しでは長時間を要するためセッション内での完了を断念し、ユーザーによる手動実行手順を明記。build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, security-test-instructions.md, build-and-test-summary.mdを生成。ユーザーに承認を依頼。"
+**Files Generated**:
+- aidlc-docs/construction/build-and-test/build-instructions.md
+- aidlc-docs/construction/build-and-test/unit-test-instructions.md
+- aidlc-docs/construction/build-and-test/integration-test-instructions.md
+- aidlc-docs/construction/build-and-test/performance-test-instructions.md
+- aidlc-docs/construction/build-and-test/security-test-instructions.md
+- aidlc-docs/construction/build-and-test/build-and-test-summary.md
+
+---

@@ -58,7 +58,7 @@
 - [x] Code Generation — Complete, Approved (2026-07-18T10:47:00Z)
 
 #### 全Unit完了後
-- [ ] Build and Test — EXECUTE (ALWAYS), In Progress
+- [ ] Build and Test — EXECUTE (ALWAYS), In Progress（成果物生成完了、承認待ち）
 
 ### 🟡 OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER

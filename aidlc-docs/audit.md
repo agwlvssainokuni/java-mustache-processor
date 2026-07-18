@@ -612,3 +612,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) NFR Design 完了。Code Generation (Unit 2: cli) へ進む。
 
 ---
+
+## Code Generation (cli) - Part1 プラン提示
+**Timestamp**: 2026-07-18T10:00:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/plans/cli-code-generation-plan.md を作成。全10ステップ（cli/build.gradle.kts本実装（Jackson/Shadow plugin/OWASP Dependency-Check/SLF4J）、例外・ドメインモデル（ArgumentException/ExitCode/CliArguments）、ArgumentParser、DataLoader、OutputWriter、CliRunner（例外→ExitCodeマッピング含む）、Main、単体テスト（ArgumentParser/DataLoader/OutputWriter/CliRunner）、ドキュメント生成、OWASP Dependency-Check設定検証）。Repository Layer/Frontend/DB Migrationはcliの性質上対象外、Deployment Artifacts Generationはfat jarビルド設定のみStep1で対応し実際の配布プロセス構築は対象外と判断し理由を明記。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit2(cli) Code Generation (Part1 Step 4-6)
+
+---

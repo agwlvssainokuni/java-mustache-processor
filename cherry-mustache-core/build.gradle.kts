@@ -17,4 +17,5 @@ dependencies {
 dependencyCheck {
     failBuildOnCVSS = 7.0f
     suppressionFile = "dependency-check-suppressions.xml"
+    nvd.apiKey = (findProperty("nvdApiKey") as String?) ?: System.getenv("NVD_API_KEY")
 }

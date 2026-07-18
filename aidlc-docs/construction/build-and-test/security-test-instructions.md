@@ -21,13 +21,16 @@
 
 **ユーザーによる手動実行が必要**:
 1. [NVD API Key](https://nvd.nist.gov/developers/request-an-api-key)を取得する（無料、即時発行）
-2. `~/.gradle/gradle.properties`等に以下を設定する:
+2. ローカル実行時は`~/.gradle/gradle.properties`等に以下を設定する:
    ```properties
    nvdApiKey=<取得したAPIキー>
    ```
-   または`cherry-mustache-core/build.gradle.kts`/`cherry-mustache-cli/build.gradle.kts`の`dependencyCheck { }`ブロックに`nvd.apiKey`設定を追加する
+   （両モジュールの`build.gradle.kts`は`dependencyCheck.nvd.apiKey`として、Gradleプロパティ`nvdApiKey`または環境変数`NVD_API_KEY`のいずれかから読み込む設定を組み込み済み）
 3. `./gradlew dependencyCheckAnalyze`を実行する（APIキーがあれば数分程度で完了する）
 4. レポートを確認し、CVSS 7.0以上の指摘があれば依存バージョンの更新または抑制ルールの追加を検討する
+
+### CI（GitHub Actions）での実行
+`.github/workflows/dependency-check.yml`により、毎週月曜（03:00 UTC）の定期実行と手動実行（`workflow_dispatch`）に対応済み。リポジトリのSecretsに`NVD_API_KEY`を登録することで、CI上でも同様にスキャンが実行される（Secrets未登録の場合はAPIキー無しの低速モードで実行される）。ビルド・テストを行う`build.yml`とは別ワークフローに分離した理由: 依存関係スキャンはNVD同期のため実行時間が長くなりうる／頻度もビルド・テストほど高くする必要がないため。
 
 ## 2. 入力検証（SECURITY-05）
 

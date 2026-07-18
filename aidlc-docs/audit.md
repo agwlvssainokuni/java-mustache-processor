@@ -620,3 +620,20 @@
 **Context**: CONSTRUCTION - Unit2(cli) Code Generation (Part1 Step 4-6)
 
 ---
+
+## Code Generation (cli) - Part1 承認
+**Timestamp**: 2026-07-18T10:02:00Z
+**AI Prompt**: "このプランの内容で生成を進めてよろしいですか？（Request Changes / 承認して生成開始）"
+**User Response**: "承認して生成開始"
+**Status**: Approved
+**Context**: CONSTRUCTION - Unit2(cli) Code Generation Part1（Planning）完了。Part2（Generation）へ移行。
+
+---
+
+## Code Generation (cli) - Step1〜7完了
+**Timestamp**: 2026-07-18T10:20:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "cli/build.gradle.ktsを本実装（Jackson, Gradle Shadow plugin 9.6.0, OWASP Dependency-Check, SLF4J）。例外・ドメインモデル（ArgumentException, ExitCode, CliArguments）、ArgumentParser（引数解析・標準入力競合検出・--help優先処理）、DataLoader（Jackson JSON/YAML読込・形式判定）、OutputWriter、CliRunner（オーケストレーション全体・単一try-catchチェーンによる例外→ExitCodeマッピング）、Mainを生成。fat jarによる手動スモークテストで、当初slf4j-simpleをtestRuntimeOnlyのみとしていたためSLF4J未提供警告がstderrに出力される不具合を発見し、implementationスコープに変更して同梱することで解消（cliはライブラリではなくエンドユーザー向け実行可能ツールのため、coreと異なりバインディングを同梱する方針に修正）。正常系・異常系ともに期待通りの出力・終了コードを確認。"
+**Context**: CONSTRUCTION - Unit2(cli) Code Generation Part2 (Step1〜7完了、SLF4Jバインディング同梱の是正含む)
+
+---

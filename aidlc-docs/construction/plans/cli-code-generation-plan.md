@@ -85,12 +85,12 @@
 - 合計34件、全件成功（`./gradlew :cli:test`）。`./gradlew test`でcore（197件）+cli（34件）の回帰なしを確認
 
 ### Step 9: ドキュメント生成
-- [ ] `aidlc-docs/construction/cli/code/code-summary.md`（生成ファイル一覧、テスト構成、既知の制約事項）
-- [ ] リポジトリルートまたは`cli/`にCLI使用方法の簡易ドキュメント（オプション一覧、使用例）を追加するか検討し、追加する場合は`README.md`を新規作成・更新する
+- [x] `aidlc-docs/construction/cli/code/code-summary.md`（生成ファイル一覧、テスト構成、発見・是正した不具合、手動スモークテスト結果、既知の制約事項）
+- [x] リポジトリルートに`README.md`を新規作成（`core`/`cli`双方の使い方、オプション一覧、実行例、ラムダ非対応の制約を記載）
 
 ### Step 10: OWASP Dependency-Check設定検証
-- [ ] `./gradlew :cli:tasks`で`dependencyCheckAnalyze`等のタスクが登録されていることを確認
-- [ ] 実際のスキャン実行はBuild and Testステージで実施（`core`と同じ方針）
+- [x] `./gradlew :cli:tasks --all`で`dependencyCheckAnalyze`/`dependencyCheckAggregate`/`dependencyCheckPurge`/`dependencyCheckUpdate`タスクが登録されていることを確認
+- [x] 実際のスキャン実行はBuild and Testステージで実施（`core`と同じ方針）
 
 ## 対象外と判断した項目（理由付き）
 - **Repository Layer**: cliはデータストアを持たないため対象外

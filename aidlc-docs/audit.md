@@ -645,3 +645,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) Code Generation Part2 (Step8完了)
 
 ---
+
+## Code Generation (cli) - Step9〜10完了・Part2完了
+**Timestamp**: 2026-07-18T10:45:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "aidlc-docs/construction/cli/code/code-summary.mdを作成（生成ファイル一覧、テスト構成、SLF4Jバインディング同梱の是正記録、手動スモークテスト結果、既知の制約事項）。リポジトリルートにREADME.mdを新規作成（core/cli双方の使い方、CLIオプション一覧・実行例・ラムダ非対応の制約）。OWASP Dependency-Checkの設定検証として./gradlew :cli:tasks --allでdependencyCheckAnalyze等のタスク登録を確認（実際のスキャン実行はBuild and Testステージで実施）。Code Generation (cli) Part2の全10ステップが完了。ユーザーに承認を依頼。"
+**Context**: CONSTRUCTION - Unit2(cli) Code Generation Part2 (Step9〜10完了、全ステップ完了)
+
+---

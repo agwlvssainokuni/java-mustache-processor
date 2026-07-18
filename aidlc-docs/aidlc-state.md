@@ -55,7 +55,7 @@
 - [x] NFR Requirements — Complete, Approved (2026-07-18T09:37:00Z)
 - [x] NFR Design — Complete, Approved (2026-07-18T09:52:00Z)
 - [x] Infrastructure Design — Skipped（クラウドインフラを持たないCLIのため対象外）
-- [ ] Code Generation — EXECUTE (ALWAYS), In Progress
+- [ ] Code Generation — EXECUTE (ALWAYS), In Progress（Part2全10ステップ完了、承認待ち）
 
 #### 全Unit完了後
 - [ ] Build and Test — EXECUTE (ALWAYS)

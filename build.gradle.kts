@@ -2,7 +2,7 @@ import org.gradle.api.plugins.JavaPluginExtension
 
 allprojects {
     group = "cherry.mustache"
-    version = "0.1.0-SNAPSHOT"
+    version = "0.1.0"
 
     repositories {
         mavenCentral()

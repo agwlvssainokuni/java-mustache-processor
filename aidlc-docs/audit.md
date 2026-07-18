@@ -686,3 +686,11 @@
 **Context**: Build and Test（承認前のRequest Changesとして対応。ビルド設定・生きたドキュメントの更新完了）
 
 ---
+
+## Build and Test - Request Changes（バージョンからSNAPSHOTを削除）
+**Timestamp**: 2026-07-18T11:20:00Z
+**User Input**: "バージョンから SNAPSHOT を削除。"
+**AI Response**: "ルートbuild.gradle.ktsのversionを\"0.1.0-SNAPSHOT\"から\"0.1.0\"に変更。./gradlew clean buildでBUILD SUCCESSFUL・全231テスト成功を確認。生成物名がcherry-mustache-core-0.1.0.jar / cherry-mustache-cli-0.1.0(-all).jarに変わったことを確認。fat jarで再度スモークテストし正常動作を確認。build-and-test-summary.md・integration-test-instructions.mdの成果物パス記述（\"生きたドキュメント\"）を更新。code-summary.md・cli-code-generation-plan.md等の過去の生成記録内のバージョン表記は歴史的記録として据え置いた。"
+**Context**: Build and Test（承認前のRequest Changesとして対応）
+
+---

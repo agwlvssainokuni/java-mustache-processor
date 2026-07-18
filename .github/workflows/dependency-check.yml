@@ -1,9 +1,9 @@
 name: Dependency Check
 
 on:
-  schedule:
-    # 毎週月曜 03:00 UTC
-    - cron: '0 3 * * 1'
+  # schedule:
+  #   # 毎週月曜 03:00 UTC
+  #   - cron: '0 3 * * 1'
   workflow_dispatch: {}
 
 jobs:

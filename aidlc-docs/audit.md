@@ -637,3 +637,11 @@
 **Context**: CONSTRUCTION - Unit2(cli) Code Generation Part2 (Step1〜7完了、SLF4Jバインディング同梱の是正含む)
 
 ---
+
+## Code Generation (cli) - Step8完了
+**Timestamp**: 2026-07-18T10:35:00Z
+**User Input**: (N/A - AI initiated)
+**AI Response**: "JUnit5単体テストを生成: ArgumentParserTest（12件: 正常系・異常系・--help優先処理・標準入力競合検出）, DataLoaderTest（7件: JSON/YAML判定・Jackson構文エラー）, OutputWriterTest（3件: 標準出力/ファイル出力・上書き）, CliRunnerTest（12件: 標準入出力モック化による正常系・--help・全異常系のExitCode検証、特にデータ構文エラー時にPARSE_ERROR（IO_ERRORではない）になることを明示的に検証しcatch順序の回帰を防止、循環パーシャル参照によるRENDER_ERROR検証も含む）。合計34件全件成功。./gradlew testでcore（197件）+cli（34件）の回帰なしを確認。"
+**Context**: CONSTRUCTION - Unit2(cli) Code Generation Part2 (Step8完了)
+
+---

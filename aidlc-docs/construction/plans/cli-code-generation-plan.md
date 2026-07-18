@@ -77,11 +77,12 @@
 - [x] fat jar（`cli-0.1.0-SNAPSHOT-all.jar`）による手動スモークテストを実施し、正常系（変数展開、パーシャル解決、YAML自動判定、複数テンプレート連結、標準入力データ、`--output`、`--help`）・異常系（引数エラー、テンプレート構文エラー、データ構文エラー、存在しないファイル、標準入力競合）のすべてで期待通りの出力・終了コードを確認
 
 ### Step 8: 単体テストの生成（NFR-REL-1、cli-nfr-requirements-plan.md Q5=A）
-- [ ] `ArgumentParserTest`（正常系・異常系: 位置引数0件、未知オプション、標準入力競合検出、`--help`等）
-- [ ] `DataLoaderTest`（JSON/YAML読込、拡張子判定、`--format`優先、判定不能ケース、Jackson構文エラー）
-- [ ] `OutputWriterTest`（標準出力/ファイル出力、上書き）
-- [ ] `CliRunnerTest`（`ByteArrayInputStream`/`ByteArrayOutputStream`による標準入出力モック化。代表的な引数パターン・データ形式・エラーケース（引数エラー、データ構文エラー、テンプレート構文エラー、レンダリングエラー、I/Oエラー）ごとに`ExitCode`と出力内容を検証。特にJSON構文エラー時に`PARSE_ERROR`（`IO_ERROR`ではない）になることを明示的に検証するケースを含める（catch順序の正しさの回帰防止）
+- [x] `ArgumentParserTest`（12件: 正常系（既定値・全オプション）、異常系（位置引数0件、未知オプション、値欠落、不正な`--format`）、`--help`優先処理（長短両形式）、標準入力競合検出（テンプレート`-`単独、明示的`--data -`、複数テンプレート`-`）、非競合ケース）
+- [x] `DataLoaderTest`（7件: JSON/YAML拡張子判定、`--format`優先、拡張子判定不能、標準入力+`--format`必須、標準入力+`--format`指定、Jackson構文エラー）
+- [x] `OutputWriterTest`（3件: 標準出力書き込み、ファイル書き込み、既存ファイル上書き）
+- [x] `CliRunnerTest`（12件: `ByteArrayInputStream`/`ByteArrayOutputStream`による標準入出力モック化。正常系（変数展開、パーシャル、複数テンプレート連結、ファイル出力、YAML自動判定、標準入力データ既定）、`--help`、異常系（引数エラー、データ構文エラー→`PARSE_ERROR`（`IO_ERROR`ではないことを明示的に検証、catch順序の回帰防止）、テンプレート構文エラー→`PARSE_ERROR`、存在しないテンプレートファイル→`IO_ERROR`、循環パーシャル参照→`RENDER_ERROR`）
 - 対応NFR: NFR-REL-1
+- 合計34件、全件成功（`./gradlew :cli:test`）。`./gradlew test`でcore（197件）+cli（34件）の回帰なしを確認
 
 ### Step 9: ドキュメント生成
 - [ ] `aidlc-docs/construction/cli/code/code-summary.md`（生成ファイル一覧、テスト構成、既知の制約事項）
